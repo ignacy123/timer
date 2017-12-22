@@ -11,7 +11,7 @@ import com.example.timer.viewmodel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-	private MainActivityViewModel viewModel;
+	public MainActivityViewModel viewModel; //TODO
 	ActivityMainBinding binding;
 	private boolean counting;
 

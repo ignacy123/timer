@@ -4,6 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.timer.businesslogic.timeprovider.TimeProvider;
+import com.example.timer.businesslogic.timeprovider.TimeProviderImpl;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +25,7 @@ public class MainActivityViewModel extends ViewModel {
 	long time1;
 	long time2;
 	Timer t;
+	public TimeProvider provider = new TimeProviderImpl();
 
 	public LiveData<String> getCounter() {
 		return counter;
@@ -35,21 +39,21 @@ public class MainActivityViewModel extends ViewModel {
 	}
 
 	public void startCounting() {
-		time1 = System.currentTimeMillis();
+		time1 = provider.provideTime();
 
 		t = new Timer();
 		t.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
-				counter.postValue(String.valueOf(System.currentTimeMillis() - time1));
+				counter.postValue(String.valueOf(provider.provideTime() - time1));
 			}
 		}, 0, 10);
 
 	}
 
 	public void stopCounting() {
-		time2 = System.currentTimeMillis();
+		time2 = provider.provideTime();
 		counter.postValue(String.valueOf((time2 - time1)));
 		t.cancel();
 
