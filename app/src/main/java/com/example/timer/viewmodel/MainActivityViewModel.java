@@ -25,6 +25,9 @@ public class MainActivityViewModel extends ViewModel {
 		return counter;
 	}
 
+	// REVIEW:
+	// ViewModel musi zwracać typ LiveData, klienci (Activity/Fragment)
+	// nie powinni mieć możliwości zawołania #setValue, które wystawia MutableLiveData
 	public MutableLiveData<String> getScramble() {
 		return scramble;
 	}
