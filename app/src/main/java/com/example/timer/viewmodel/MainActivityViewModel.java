@@ -17,6 +17,8 @@ public class MainActivityViewModel extends ViewModel {
 
 	MutableLiveData<String> scramble = new MutableLiveData<>();
 
+	// REVIEW:
+	// elementy zwiazane z liczeniem powinny byc w jakiejs osobnej klasy
 	long time1;
 	long time2;
 	Timer t;
