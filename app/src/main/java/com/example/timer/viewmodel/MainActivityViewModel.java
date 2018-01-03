@@ -12,6 +12,7 @@ import com.example.timer.model.Score;
 import com.example.timer.sql.AppDatabase;
 import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
+import com.example.timer.util.TimeCounter;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,10 +29,8 @@ public class MainActivityViewModel extends AndroidViewModel {
 
 	// REVIEW:
 	// elementy zwiazane z liczeniem powinny byc w jakiejs osobnej klasy
-	long time1;
-	long time2;
+	public TimeCounter timeCounter = new TimeCounter();
 	Timer t;
-	public TimeProvider provider = new TimeProviderImpl();
 
 	public MainActivityViewModel(@NonNull Application application) {
 		super(application);
@@ -44,10 +43,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 		return counter;
 	}
 
-	// REVIEW:
-	// ViewModel musi zwracać typ LiveData, klienci (Activity/Fragment)
-	// nie powinni mieć możliwości zawołania #setValue, które wystawia MutableLiveData
-	public MutableLiveData<String> getScramble() {
+	public LiveData<String> getScramble() {
 		return scramble;
 	}
 
@@ -55,25 +51,22 @@ public class MainActivityViewModel extends AndroidViewModel {
 	AppExecutors executors;
 
 	public void startCounting() {
-		time1 = provider.provideTime();
-
+		timeCounter.startCounting();
 		t = new Timer();
 		t.schedule(new TimerTask() {
 
 			@Override
 			public void run() {
-				counter.postValue(String.valueOf(provider.provideTime() - time1));
+				counter.postValue(String.valueOf(timeCounter.provideDifference()));
 			}
 		}, 0, 10);
 
 	}
 
 	public void stopCounting() {
-		time2 = provider.provideTime();
-		long timeDifference = time2 - time1;
-		counter.postValue(String.valueOf(timeDifference));
+		counter.postValue(String.valueOf(timeCounter.stopCounting()));
 		t.cancel();
-		Score score = new Score("", timeDifference);
+		Score score = new Score("", timeCounter.stopCounting());
 		executors.diskIO()
 				.execute(() -> scoreDAO.persist(score));
 

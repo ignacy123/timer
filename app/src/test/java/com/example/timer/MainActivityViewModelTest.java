@@ -27,7 +27,7 @@ public class MainActivityViewModelTest {
 
 	@Before
 	public void setUp() {
-		viewModel = new MainActivityViewModel();
+		viewModel = new MainActivityViewModel();//TODO
 	}
 
 	@Test
