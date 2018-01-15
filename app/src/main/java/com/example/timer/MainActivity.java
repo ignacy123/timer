@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 				.observe(this, scrambleValue -> {
 					binding.setScramble(scrambleValue);
 				});
-		viewModel.setScramble();
 	}
 
 	public void startCounting(View view) {
 		if (counting) {
+			viewModel.setScramble();
 			viewModel.stopCounting();
 			counting = false;
 		} else {

@@ -6,8 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.example.timer.businesslogic.timeprovider.TimeProvider;
-import com.example.timer.businesslogic.timeprovider.TimeProviderImpl;
+import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGenerator;
 import com.example.timer.model.Score;
 import com.example.timer.sql.AppDatabase;
 import com.example.timer.sql.ScoreDAO;
@@ -26,6 +25,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 	MutableLiveData<String> counter = new MutableLiveData<>();
 
 	MutableLiveData<String> scramble = new MutableLiveData<>();
+	private ThreeByThreeScrambleGenerator generator = new ThreeByThreeScrambleGenerator();
 
 	// REVIEW:
 	// elementy zwiazane z liczeniem powinny byc w jakiejs osobnej klasy
@@ -65,6 +65,7 @@ public class MainActivityViewModel extends AndroidViewModel {
 
 	public void stopCounting() {
 		counter.postValue(String.valueOf(timeCounter.stopCounting()));
+		scramble.postValue(generator.generate());
 		t.cancel();
 		Score score = new Score("", timeCounter.stopCounting());
 		executors.diskIO()
@@ -73,7 +74,6 @@ public class MainActivityViewModel extends AndroidViewModel {
 	}
 
 	public void setScramble() {
-		scramble.postValue("Scramble will be displayed here.");
 	}
 
 }
