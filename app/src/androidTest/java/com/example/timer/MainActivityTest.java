@@ -3,7 +3,8 @@ package com.example.timer;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.timer.util.FakeTimeProvider;
+import com.example.timer.util.ViewModelUtil;
+import com.example.timer.viewmodel.MainActivityViewModel;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -15,6 +16,9 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by ignacy on 09.11.17.
@@ -22,16 +26,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-	private FakeTimeProvider fakeTimeProvider = new FakeTimeProvider();
+	private MainActivityViewModel viewModel;
 
 	@Before
-	public void init() {
-		activityRule.getActivity().viewModel.timeCounter.provider = fakeTimeProvider;
 
+	public void init() {
+		viewModel = mock(MainActivityViewModel.class);
+		activityRule.getActivity().viewModelFactory = ViewModelUtil.createFor(viewModel);
+		activityRule.launchActivity(null);
 	}
 
 	@Rule
-	public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class, true, true);
+	public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class, true, false);
 
 	@Test
 	public void showsData() {
@@ -48,12 +54,12 @@ public class MainActivityTest {
 	@Test
 	public void countsTime() {
 		onView(withId(R.id.counter)).check(matches(withText("")));
-		fakeTimeProvider.setTime(0);
 		onView(withId(R.id.counter)).perform(click());
-		fakeTimeProvider.setTime(6000);
+		verify(viewModel, times(1)).startCounting();
 		onView(withId(R.id.counter)).perform(click());
+		verify(viewModel, times(1)).stopCounting();
 
-		onView(withId(R.id.counter)).check(matches(withText("6000")));
+		//		onView(withId(R.id.counter)).check(matches(withText("6000")));
 	}
 
 	@Test

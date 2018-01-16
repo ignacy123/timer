@@ -38,6 +38,7 @@
             android:layout_width="184dp"
             android:layout_height="25dp"
             android:background="#FFF000"
+            android:text="@{scramble}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"

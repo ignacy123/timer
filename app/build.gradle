@@ -8,7 +8,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.timer.util.MyTestRunner"
     }
     dataBinding {
         enabled = true
@@ -40,10 +40,16 @@ dependencies {
     compile 'android.arch.persistence.room:runtime:1.0.0'
     compile "android.arch.lifecycle:runtime:1.0.0"
     compile "android.arch.lifecycle:extensions:1.0.0"
+    compile 'com.google.dagger:dagger-android:2.14.1'
+    compile 'com.google.dagger:dagger-android-support:2.14.1'
 
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+
+    implementation 'com.google.dagger:dagger:2.14.1'
 
     testCompile "android.arch.core:core-testing:1.0.0"
     testCompile 'junit:junit:4.12'

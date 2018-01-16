@@ -27,8 +27,7 @@ public class MainActivityViewModelTest {
 
 	@Before
 	public void setUp() {
-		viewModel = new MainActivityViewModel();//TODO - w starym projekcie tutaj jest użyty servicelocator. W tym projekcie zrezygnowaliśmy z niego na rzecz Daggera.
-		//Czy tu po implementecji daggera będzie dało się poprawić ten test?
+		//		viewModel = new MainActivityViewModel();
 	}
 
 	@Test
