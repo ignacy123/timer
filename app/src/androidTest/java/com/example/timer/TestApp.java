@@ -1,10 +1,9 @@
 package com.example.timer;
 
-import android.app.Activity;
 import android.app.Application;
-
+import android.support.v4.app.Fragment;
 import dagger.android.AndroidInjector;
-import dagger.android.HasActivityInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
 import static org.mockito.Mockito.mock;
 
@@ -12,7 +11,7 @@ import static org.mockito.Mockito.mock;
  * Created by ignacy on 16.01.18.
  */
 
-public class TestApp extends Application implements HasActivityInjector {
+public class TestApp extends Application implements HasSupportFragmentInjector {
 
 	@Override
 	public void onCreate() {
@@ -20,7 +19,7 @@ public class TestApp extends Application implements HasActivityInjector {
 	}
 
 	@Override
-	public AndroidInjector<Activity> activityInjector() {
+	public AndroidInjector<Fragment> supportFragmentInjector() {
 		return mock(AndroidInjector.class);
 	}
 }

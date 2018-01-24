@@ -5,17 +5,15 @@ package com.example.timer.di;
  */
 
 import android.app.Application;
-
 import com.example.timer.MyApp;
-
-import javax.inject.Singleton;
-
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
+import javax.inject.Singleton;
+
 @Singleton
-@Component(modules = { AndroidInjectionModule.class, AppModule.class, MainActivityModule.class })
+@Component(modules = { AndroidInjectionModule.class, AppModule.class, MainActivityModule.class, MainFragmentModule.class })
 public interface AppComponent {
 
 	@Component.Builder

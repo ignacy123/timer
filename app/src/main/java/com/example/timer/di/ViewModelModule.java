@@ -7,7 +7,7 @@ package com.example.timer.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.timer.viewmodel.MainActivityViewModel;
+import com.example.timer.viewmodel.MainViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -18,8 +18,8 @@ abstract class ViewModelModule {
 
 	@Binds
 	@IntoMap
-	@ViewModelKey(MainActivityViewModel.class)
-	abstract ViewModel bindMainActivityViewModel(MainActivityViewModel activeMainActivityViewModel);
+	@ViewModelKey(MainViewModel.class)
+	abstract ViewModel bindMainActivityViewModel(MainViewModel activeMainActivityViewModel);
 
 	@Binds
 	abstract ViewModelProvider.Factory bindViewModelFactory(AppViewModelFactory factory);

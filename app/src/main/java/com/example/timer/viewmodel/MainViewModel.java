@@ -3,23 +3,21 @@ package com.example.timer.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.model.Score;
 import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
 
+import javax.inject.Inject;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.inject.Inject;
 
 /**
  * Created by ignacy on 23.11.17.
  */
 
-public class MainActivityViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
 	MutableLiveData<String> counter = new MutableLiveData<>();
 
@@ -32,7 +30,7 @@ public class MainActivityViewModel extends ViewModel {
 	Timer t;
 
 	@Inject
-	public MainActivityViewModel(TimeCounter timeCounter, ScoreDAO scoreDAO, AppExecutors executors) {
+	public MainViewModel(TimeCounter timeCounter, ScoreDAO scoreDAO, AppExecutors executors) {
 		this.timeCounter = timeCounter;
 		this.scoreDAO = scoreDAO;
 		this.executors = executors;

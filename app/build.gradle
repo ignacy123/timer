@@ -57,4 +57,5 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:2.11.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation "android.arch.core:core-testing:1.0.0"
 }

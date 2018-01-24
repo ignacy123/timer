@@ -6,7 +6,7 @@ package com.example.timer;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 
-import com.example.timer.viewmodel.MainActivityViewModel;
+import com.example.timer.viewmodel.MainViewModel;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -23,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class MainActivityViewModelTest {
 
-	MainActivityViewModel viewModel;
+	MainViewModel viewModel;
 
 	@Before
 	public void setUp() {
