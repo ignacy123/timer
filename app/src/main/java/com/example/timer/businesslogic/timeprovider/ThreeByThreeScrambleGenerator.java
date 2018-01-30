@@ -5,5 +5,5 @@ package com.example.timer.businesslogic.timeprovider;
  */
 
 public interface ThreeByThreeScrambleGenerator {
-
+	String generate();
 }

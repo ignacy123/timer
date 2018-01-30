@@ -8,42 +8,70 @@ import java.util.Random;
 
 public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGenerator {
 
-	ThreeByThreeMove.ThreeByThreeMoves r = ThreeByThreeMove.ThreeByThreeMoves.R;
-	ThreeByThreeMove.ThreeByThreeMoves l = ThreeByThreeMove.ThreeByThreeMoves.L;
-	ThreeByThreeMove.ThreeByThreeMoves u = ThreeByThreeMove.ThreeByThreeMoves.U;
-	ThreeByThreeMove.ThreeByThreeMoves d = ThreeByThreeMove.ThreeByThreeMoves.D;
-	ThreeByThreeMove.ThreeByThreeMoves b = ThreeByThreeMove.ThreeByThreeMoves.B;
-	ThreeByThreeMove.ThreeByThreeMoves f = ThreeByThreeMove.ThreeByThreeMoves.F;
-
 	public String generate() {
 		String generatedScramble = "";
 		StringBuilder builder = new StringBuilder(25);
+		ThreeByThreeMove lastMove = ThreeByThreeMove.R;
 		Random random = new Random(System.currentTimeMillis());
 		for (int i = 0; i < 25; i++) {
 			switch (random.nextInt(6)) {
-				case 1:
-					builder.append(r);
+				case 0:
+					if (lastMove == ThreeByThreeMove.R) {
+						if (i != 0) {
+							i--;
+						}
+						break;
+					}
+					builder.append(ThreeByThreeMove.R);
 					builder.append(generateSuffix());
+					lastMove = ThreeByThreeMove.R;
+					break;
+				case 1:
+					if (lastMove == ThreeByThreeMove.F) {
+						i--;
+						break;
+					}
+					builder.append(ThreeByThreeMove.F);
+					builder.append(generateSuffix());
+					lastMove = ThreeByThreeMove.F;
 					break;
 				case 2:
-					builder.append(l);
+					if (lastMove == ThreeByThreeMove.L) {
+						i--;
+						break;
+					}
+					builder.append(ThreeByThreeMove.L);
 					builder.append(generateSuffix());
+					lastMove = ThreeByThreeMove.L;
 					break;
 				case 3:
-					builder.append(u);
+					if (lastMove == ThreeByThreeMove.U) {
+						i--;
+						break;
+					}
+					builder.append(ThreeByThreeMove.U);
 					builder.append(generateSuffix());
+					lastMove = ThreeByThreeMove.U;
 					break;
 				case 4:
-					builder.append(d);
+					if (lastMove == ThreeByThreeMove.D) {
+						i--;
+						break;
+					}
+					builder.append(ThreeByThreeMove.D);
 					builder.append(generateSuffix());
+
+					lastMove = ThreeByThreeMove.D;
 					break;
 				case 5:
-					builder.append(b);
+					if (lastMove == ThreeByThreeMove.B) {
+						i--;
+						break;
+					}
+					builder.append(ThreeByThreeMove.B);
 					builder.append(generateSuffix());
-					break;
-				case 6:
-					builder.append(f);
-					builder.append(generateSuffix());
+
+					lastMove = ThreeByThreeMove.B;
 					break;
 			}
 		}
@@ -52,14 +80,14 @@ public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGe
 	}
 
 	private String generateSuffix() {
-		Random random = new Random(System.currentTimeMillis());
+		Random random = new Random();
 		switch (random.nextInt(3)) {
-			case 1:
+			case 0:
 				return "";
+			case 1:
+				return "2";
 			case 2:
 				return "'";
-			case 3:
-				return "2";
 		}
 		return "";
 	}

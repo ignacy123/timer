@@ -4,11 +4,13 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
 import com.example.timer.R;
 import com.example.timer.testing.SingleFragmentActivity;
 import com.example.timer.util.TaskExecutorWithIdlingResourceRule;
 import com.example.timer.util.ViewModelUtil;
 import com.example.timer.viewmodel.MainViewModel;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +21,10 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by ignacy on 09.11.17.
@@ -76,6 +81,16 @@ public class MainFragmentTest {
 		final String scrambleValue = "Scramble will be displayed here.";
 		scramble.postValue(scrambleValue);
 		onView(withId(R.id.scramble)).check(matches(withText(scrambleValue)));
+	}
+
+	@Test
+	public void generatesScramble() {
+		onView(withId(R.id.scramble)).check(matches(withText("")));
+		onView(withId(R.id.counter)).perform(click());
+		verify(viewModel, times(1)).startCounting();
+		onView(withId(R.id.counter)).perform(click());
+		verify(viewModel, times(1)).setScramble();
+
 	}
 
 }
