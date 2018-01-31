@@ -20,7 +20,7 @@ public class ScrambleGeneratorTest {
 	public void providesScrambleOfProperLength() {
 		ThreeByThreeScrambleGenerator generator = new ThreeByThreeScrambleGeneratorImpl();
 		String scramble = generator.generate();
-		assertThat(getAmountOfMoves(scramble), is(25));
+		assertThat(getAmountOfMoves(scramble), is(25)); // REVIEW ten test mi czasem zwraca 24
 	}
 
 	@Test
