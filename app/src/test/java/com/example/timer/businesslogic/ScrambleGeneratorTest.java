@@ -2,7 +2,6 @@ package com.example.timer.businesslogic;
 
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGenerator;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -54,6 +53,7 @@ public class ScrambleGeneratorTest {
 
 	private boolean isMove(String letter) {
 
+		//TODO REVIEW: https://pl.wikipedia.org/wiki/DRY
 		if (letter.equals("R")) {
 			return true;
 		}

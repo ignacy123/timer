@@ -14,6 +14,7 @@ public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGe
 		ThreeByThreeMove lastMove = ThreeByThreeMove.R;
 		Random random = new Random(System.currentTimeMillis());
 		for (int i = 0; i < 25; i++) {
+			//TODO REVIEW: https://pl.wikipedia.org/wiki/DRY
 			switch (random.nextInt(6)) {
 				case 0:
 					if (lastMove == ThreeByThreeMove.R) {
