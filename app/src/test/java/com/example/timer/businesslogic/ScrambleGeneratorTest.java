@@ -42,7 +42,7 @@ public class ScrambleGeneratorTest {
 					return true;
 				}
 				if (previousMove.equals("")) {
-					previousMove = letter;
+					previousMove = letter; // TODO REVIEW: F2 (Navigate -> Next Highlighted Error)
 				}
 				previousMove = letter;
 			}
