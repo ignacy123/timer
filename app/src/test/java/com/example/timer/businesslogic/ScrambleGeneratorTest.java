@@ -7,8 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Created by ignacy on 30.01.18.
@@ -20,14 +19,14 @@ public class ScrambleGeneratorTest {
 	public void providesScrambleOfProperLength() {
 		ThreeByThreeScrambleGenerator generator = new ThreeByThreeScrambleGeneratorImpl();
 		String scramble = generator.generate();
-		assertThat(getAmountOfMoves(scramble), is(25)); // REVIEW ten test mi czasem zwraca 24
+		assertThat(getAmountOfMoves(scramble)).isEqualTo(25); // TODO REVIEW ten test mi czasem zwraca 24
 	}
 
 	@Test
 	public void providesScrambleWithNoInvalidRepetitions() {
 		ThreeByThreeScrambleGenerator generator = new ThreeByThreeScrambleGeneratorImpl();
 		String scramble = generator.generate();
-		assertThat(hasInvalidRepetitions(scramble), is(false));
+		assertThat(hasInvalidRepetitions(scramble)).isFalse();
 	}
 
 	private boolean hasInvalidRepetitions(String scramble) {
