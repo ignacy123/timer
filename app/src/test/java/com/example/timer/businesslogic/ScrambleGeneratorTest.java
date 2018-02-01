@@ -21,7 +21,7 @@ public class ScrambleGeneratorTest {
 	public void providesScrambleOfProperLength() {
 		ThreeByThreeScrambleGenerator generator = new ThreeByThreeScrambleGeneratorImpl();
 		String scramble = generator.generate();
-		assertThat(getAmountOfMoves(scramble)).isEqualTo(25); // TODO REVIEW ten test mi czasem zwraca 24
+		assertThat(getAmountOfMoves(scramble)).isEqualTo(25);
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class ScrambleGeneratorTest {
 	}
 
 	private boolean hasInvalidRepetitions(String scramble) {
-		List<String> chars = new ArrayList<String>();
+		List<String> chars = new ArrayList<>();
 		for (int i = 0; i < scramble.length(); i++) {
 			chars.add(scramble.substring(i, i + 1));
 		}
@@ -41,9 +41,6 @@ public class ScrambleGeneratorTest {
 			if (isMove(letter)) {
 				if (previousMove.equals(letter)) {
 					return true;
-				}
-				if (previousMove.equals("")) {
-					previousMove = letter; // TODO REVIEW: F2 (Navigate -> Next Highlighted Error)
 				}
 				previousMove = letter;
 			}
