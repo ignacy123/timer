@@ -2,9 +2,11 @@ package com.example.timer.businesslogic;
 
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGenerator;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -52,30 +54,8 @@ public class ScrambleGeneratorTest {
 
 	private boolean isMove(String letter) {
 
-		//TODO REVIEW: https://pl.wikipedia.org/wiki/DRY
-		if (letter.equals("R")) {
-			return true;
-		}
-		if (letter.equals("L")) {
-			return true;
-
-		}
-		if (letter.equals("U")) {
-			return true;
-		}
-		if (letter.equals("D")) {
-			return true;
-
-		}
-		if (letter.equals("B")) {
-			return true;
-
-		}
-		if (letter.equals("F")) {
-			return true;
-
-		}
-		return false;
+		return Arrays.asList("R", "L", "B", "D", "U", "F")
+				.contains(letter);
 	}
 
 	private int getAmountOfMoves(String scramble) {

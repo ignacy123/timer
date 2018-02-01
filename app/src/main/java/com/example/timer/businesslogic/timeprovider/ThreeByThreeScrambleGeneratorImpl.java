@@ -1,6 +1,15 @@
 package com.example.timer.businesslogic.timeprovider;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.Random;
+
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.B;
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.D;
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.F;
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.L;
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.R;
+import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.U;
 
 /**
  * Created by ignacy on 15.01.18.
@@ -8,73 +17,29 @@ import java.util.Random;
 
 public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGenerator {
 
+	public static final ImmutableMap<Integer, ThreeByThreeMove> MAP = ImmutableMap.<Integer, ThreeByThreeMove>builder().put(0, R)
+			.put(1, L)
+			.put(2, F)
+			.put(3, B)
+			.put(4, D)
+			.put(5, U)
+			.build();
+
 	public String generate() {
 		String generatedScramble = "";
 		StringBuilder builder = new StringBuilder(25);
-		ThreeByThreeMove lastMove = ThreeByThreeMove.R;
 		Random random = new Random(System.currentTimeMillis());
+		int previousInt = 0;
 		for (int i = 0; i < 25; i++) {
-			//TODO REVIEW: https://pl.wikipedia.org/wiki/DRY
-			switch (random.nextInt(6)) {
-				case 0:
-					if (lastMove == ThreeByThreeMove.R) {
-						if (i != 0) {
-							i--;
-						}
-						break;
-					}
-					builder.append(ThreeByThreeMove.R);
-					builder.append(generateSuffix());
-					lastMove = ThreeByThreeMove.R;
-					break;
-				case 1:
-					if (lastMove == ThreeByThreeMove.F) {
-						i--;
-						break;
-					}
-					builder.append(ThreeByThreeMove.F);
-					builder.append(generateSuffix());
-					lastMove = ThreeByThreeMove.F;
-					break;
-				case 2:
-					if (lastMove == ThreeByThreeMove.L) {
-						i--;
-						break;
-					}
-					builder.append(ThreeByThreeMove.L);
-					builder.append(generateSuffix());
-					lastMove = ThreeByThreeMove.L;
-					break;
-				case 3:
-					if (lastMove == ThreeByThreeMove.U) {
-						i--;
-						break;
-					}
-					builder.append(ThreeByThreeMove.U);
-					builder.append(generateSuffix());
-					lastMove = ThreeByThreeMove.U;
-					break;
-				case 4:
-					if (lastMove == ThreeByThreeMove.D) {
-						i--;
-						break;
-					}
-					builder.append(ThreeByThreeMove.D);
-					builder.append(generateSuffix());
+			int nextInt;
+			do {
+				nextInt = random.nextInt(6);
+			} while (nextInt == previousInt);
 
-					lastMove = ThreeByThreeMove.D;
-					break;
-				case 5:
-					if (lastMove == ThreeByThreeMove.B) {
-						i--;
-						break;
-					}
-					builder.append(ThreeByThreeMove.B);
-					builder.append(generateSuffix());
-
-					lastMove = ThreeByThreeMove.B;
-					break;
-			}
+			ThreeByThreeMove move = MAP.get(nextInt);
+			builder.append(move);
+			builder.append(generateSuffix());
+			previousInt = nextInt;
 		}
 		generatedScramble = builder.toString();
 		return generatedScramble;
