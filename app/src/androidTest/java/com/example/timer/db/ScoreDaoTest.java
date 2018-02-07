@@ -29,7 +29,7 @@ public class ScoreDaoTest extends DbTest {
 
 	@Test
 	public void insertsAndFetchesScore() throws InterruptedException {
-		Score score = new Score("wddwdwdw", 6000);
+		Score score = new Score("wddwdwdw", 6000, "");
 		db.scoreDao()
 				.persist(score);
 		List<Score> scoreFromDb = getValue(db.scoreDao()
@@ -41,7 +41,7 @@ public class ScoreDaoTest extends DbTest {
 
 	@Test
 	public void insertsAndFetchesTwoIndeticalScores() throws InterruptedException {
-		Score score = new Score("wddwdwdw", 6000);
+		Score score = new Score("wddwdwdw", 6000, "");
 		db.scoreDao()
 				.persist(score);
 		db.scoreDao()
@@ -54,7 +54,7 @@ public class ScoreDaoTest extends DbTest {
 	@Test
 	public void clearsDatabase() throws InterruptedException {
 
-		Score score = new Score("wddwdwdw", 6000);
+		Score score = new Score("wddwdwdw", 6000, "");
 		db.scoreDao()
 				.persist(score);
 		db.scoreDao()

@@ -7,11 +7,11 @@
 
         <variable
             name="counter"
-            type="String"/>
+            type="String" />
 
         <variable
             name="scramble"
-            type="String"/>
+            type="String" />
 
     </data>
 
@@ -30,20 +30,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/scramble"
-            android:layout_width="184dp"
-            android:layout_height="25dp"
+            android:layout_width="355dp"
+            android:layout_height="59dp"
             android:background="#FFF000"
+            android:gravity="center"
             android:text="@{scramble}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.16"/>
+            app:layout_constraintVertical_bias="0.16" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -20,8 +20,8 @@ public class TimeCounter {
 	private final TimeProvider provider;
 	long time1;
 	long time2;
-	long difference;
 	Timer t;
+	private String formattedTime;
 
 	@Inject
 	public TimeCounter(TimeProvider provider) {
@@ -35,7 +35,7 @@ public class TimeCounter {
 
 			@Override
 			public void run() {
-				counter.postValue(String.valueOf(provideDifference()));
+				counter.postValue(returnFormattedTime(provideDifference()));
 			}
 		}, 0, 10);
 
@@ -45,11 +45,31 @@ public class TimeCounter {
 
 		t.cancel();
 		time2 = provider.provideTime();
+		formattedTime = returnFormattedTime(time2 - time1);
 		return (time2 - time1);
+
+	}
+
+	public String returnFormattedTime(long timeToFormat) {
+		String formattedTime = "";
+		formattedTime = formatSeconds((timeToFormat - timeToFormat % 1000) / 1000) + "." + String.valueOf(
+				(timeToFormat - timeToFormat % 100) / 100 % 10) + String.valueOf((timeToFormat - timeToFormat % 10) / 10 % 10)
+				+ String.valueOf(timeToFormat % 10);
+		return formattedTime;
+	}
+
+	private String formatSeconds(long s) {
+		if (s < 60) {
+			return String.valueOf(s);
+		}
+		return String.valueOf((s - s % 60) / 60) + ":" + String.valueOf(s % 60);
 	}
 
 	public long provideDifference() {
 		return (provider.provideTime() - time1);
 	}
 
+	public String getFormattedTime() {
+		return formattedTime;
+	}
 }

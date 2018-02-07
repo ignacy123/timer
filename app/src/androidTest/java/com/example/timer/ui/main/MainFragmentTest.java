@@ -6,8 +6,11 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.timer.R;
+import com.example.timer.sql.ScoreDAO;
 import com.example.timer.testing.SingleFragmentActivity;
+import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TaskExecutorWithIdlingResourceRule;
+import com.example.timer.util.TimeCounter;
 import com.example.timer.util.ViewModelUtil;
 import com.example.timer.viewmodel.MainViewModel;
 
@@ -41,9 +44,17 @@ public class MainFragmentTest {
 	private MainViewModel viewModel;
 	private MutableLiveData<String> counter = new MutableLiveData<>();
 	private MutableLiveData<String> scramble = new MutableLiveData<>();
+	private TimeCounter timeCounter;
+	private ScoreDAO scoreDAO;
+	private AppExecutors executors;
 
 	@Before
 	public void init() {
+		timeCounter = mock(TimeCounter.class);
+		long a = 6000;
+		when(timeCounter.provideDifference()).thenReturn(a);
+		scoreDAO = mock(ScoreDAO.class);
+		executors = mock(AppExecutors.class);
 		MainFragment mainFragment = new MainFragment();
 		viewModel = mock(MainViewModel.class);
 		mainFragment.viewModelFactory = ViewModelUtil.createFor(viewModel);
@@ -89,7 +100,21 @@ public class MainFragmentTest {
 		onView(withId(R.id.counter)).perform(click());
 		verify(viewModel, times(1)).startCounting();
 		onView(withId(R.id.counter)).perform(click());
-		verify(viewModel, times(1)).setScramble();
+
+	}
+
+	//TODO
+	@Test
+	public void formatsTime() {
+		viewModel = new MainViewModel(timeCounter, scoreDAO, executors);
+		MainFragment mainFragment2 = new MainFragment();
+		mainFragment2.viewModelFactory = ViewModelUtil.createFor(viewModel);
+		activityRule.getActivity()
+				.setFragment(mainFragment2);
+		onView(withId(R.id.counter)).perform(click());
+		onView(withId(R.id.counter)).perform(click());
+		final String counterValue = "6.000";
+		onView(withId(R.id.counter)).check(matches(withText(counterValue)));
 
 	}
 

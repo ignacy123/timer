@@ -25,8 +25,6 @@ public class MainViewModel extends ViewModel {
 	MutableLiveData<String> scramble = new MutableLiveData<>();
 	private ThreeByThreeScrambleGeneratorImpl generator = new ThreeByThreeScrambleGeneratorImpl();
 
-	// REVIEW:
-	// elementy zwiazane z liczeniem powinny byc w jakiejs osobnej klasy
 	private final TimeCounter timeCounter;
 	Timer t;
 
@@ -57,8 +55,9 @@ public class MainViewModel extends ViewModel {
 	//	public void changeTimerValue();
 
 	public void stopCounting() {
-		counter.postValue(String.valueOf(timeCounter.stopCounting()));
-		Score score = new Score(scramble.getValue(), timeCounter.stopCounting(), "");
+		long l = timeCounter.stopCounting();
+		Score score = new Score(scramble.getValue(), l, timeCounter.getFormattedTime());
+		counter.postValue(String.valueOf(timeCounter.getFormattedTime()));
 		executors.diskIO()
 				.execute(() -> scoreDAO.persist(score));
 		scramble.postValue(generator.generate());
