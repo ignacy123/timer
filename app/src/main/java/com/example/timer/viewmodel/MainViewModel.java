@@ -3,15 +3,16 @@ package com.example.timer.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.model.Score;
 import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
 
-import javax.inject.Inject;
 import java.util.Timer;
-import java.util.TimerTask;
+
+import javax.inject.Inject;
 
 /**
  * Created by ignacy on 23.11.17.
@@ -34,6 +35,7 @@ public class MainViewModel extends ViewModel {
 		this.timeCounter = timeCounter;
 		this.scoreDAO = scoreDAO;
 		this.executors = executors;
+		scramble.postValue(generator.generate());
 	}
 
 	public LiveData<String> getCounter() {
@@ -48,29 +50,19 @@ public class MainViewModel extends ViewModel {
 	AppExecutors executors;
 
 	public void startCounting() {
-		timeCounter.startCounting();
-		t = new Timer();
-		t.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				counter.postValue(String.valueOf(timeCounter.provideDifference()));
-			}
-		}, 0, 10);
+		timeCounter.startCounting(counter);
 
 	}
+
+	//	public void changeTimerValue();
 
 	public void stopCounting() {
 		counter.postValue(String.valueOf(timeCounter.stopCounting()));
-		scramble.postValue(generator.generate());
-		t.cancel();
-		Score score = new Score("", timeCounter.stopCounting());
+		Score score = new Score(scramble.getValue(), timeCounter.stopCounting(), "");
 		executors.diskIO()
 				.execute(() -> scoreDAO.persist(score));
+		scramble.postValue(generator.generate());
 
-	}
-
-	public void setScramble() {
 	}
 
 }

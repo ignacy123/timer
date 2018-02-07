@@ -70,7 +70,7 @@ public class MainFragmentTest {
 	@Test
 	public void showsCounterValue() {
 		onView(withId(R.id.counter)).check(matches(withText("")));
-		final String counterValue = "600";
+		final String counterValue = "6.000";
 		counter.postValue(counterValue);
 		onView(withId(R.id.counter)).check(matches(withText(counterValue)));
 	}

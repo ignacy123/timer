@@ -10,12 +10,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.timer.R;
 import com.example.timer.databinding.FragmentMainBinding;
 import com.example.timer.viewmodel.MainViewModel;
-import dagger.android.support.AndroidSupportInjection;
 
 import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 public class MainFragment extends Fragment {
 
@@ -66,7 +68,6 @@ public class MainFragment extends Fragment {
 
 	private void startCounting() {
 		if (counting) {
-			viewModel.setScramble();
 			viewModel.stopCounting();
 			counting = false;
 		} else {

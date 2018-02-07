@@ -21,7 +21,7 @@ class AppModule {
 	@Singleton
 	@Provides
 	AppDatabase provideDb(Application app) {
-		return Room.databaseBuilder(app, AppDatabase.class, "shoppinglist.db")
+		return Room.databaseBuilder(app, AppDatabase.class, "timer.db")
 				.build();
 	}
 
