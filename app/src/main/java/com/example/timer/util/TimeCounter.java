@@ -1,14 +1,12 @@
 package com.example.timer.util;
 
 import android.arch.lifecycle.MutableLiveData;
-
 import com.example.timer.businesslogic.timeprovider.TimeProvider;
 import com.example.timer.viewmodel.MainViewModel;
 
+import javax.inject.Inject;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.inject.Inject;
 
 /**
  * Created by ignacy on 03.01.18.
@@ -51,6 +49,11 @@ public class TimeCounter {
 	}
 
 	public String returnFormattedTime(long timeToFormat) {
+		// TODO po pierwsze piszac kod formatujacy w tej klasie naruszasz zasade SRP: https://en.wikipedia.org/wiki/Single_responsibility_principle
+		// a tak na prawde niepotrzebnie pisales samemu to formatowanie, mozna bylo do tego uzyc
+		// np. SimpleDateFormat (dostepny w java 6) lub DateTimeFormatter (z java8, https://github.com/JakeWharton/ThreeTenABP)
+		// warto to API znać i używać bo to podstawowe API Javy
+
 		String formattedTime = "";
 		formattedTime = formatSeconds((timeToFormat - timeToFormat % 1000) / 1000) + "." + String.valueOf(
 				(timeToFormat - timeToFormat % 100) / 100 % 10) + String.valueOf((timeToFormat - timeToFormat % 10) / 10 % 10)
