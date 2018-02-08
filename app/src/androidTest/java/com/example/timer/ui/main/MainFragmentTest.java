@@ -92,37 +92,6 @@ public class MainFragmentTest {
 
 	}
 
-	//TODO doprawadziłem ten test do działania ale raczej nie to chciałeś tu przetestować
-	// Poniższe nie miało za bardzo sensu:
-	// when(timeCounter.provideDifference()).thenReturn(a);
-	// W tym co miałeś wcześniej metoda provideDifference nie byłaby nigdy wywołana bo zamockowałeś TimeCounter,
-	// a poniewaz to mock, więc nie będzie wywołania startCounting.
-	//
-	// Z kolei w samym teście miałes dwa clicki na counterze, a w stopCounting jest wywoływane getFormattedTime,
-	// więc to wywołanie metody "nagrałem" w mocku. Tylko po nazwie metody zakładam, że to nie to co chciałeś przetestować.
-	//
-	// A tak na prawdę w tej warstwie testów zależysz tylko od zamockowanego ViewModelu, i takie zachowanie jest porządane.
-	// Dzięki temu nie zależysz od szczegółów implementacyjnych. Jeśli chcesz przetestować czy Timer formatuje to powinno się
-	// to odbyć w testach jednostkowych a nie w testach instrumentacyjnych widoku.
-	//
-	@Test
-	public void formatsTime() {
-		final String counterValue = "6.000";
-		TimeCounter timeCounter = mock(TimeCounter.class);
-		when(timeCounter.getFormattedTime()).thenReturn(counterValue);
-		ScoreDAO scoreDAO = mock(ScoreDAO.class);
-		AppExecutors executors = mock(AppExecutors.class);
-		when(executors.diskIO()).thenReturn(mock(Executor.class));
 
-		viewModel = new MainViewModel(timeCounter, scoreDAO, executors);
-		MainFragment mainFragment2 = new MainFragment();
-		mainFragment2.viewModelFactory = ViewModelUtil.createFor(viewModel);
-		activityRule.getActivity()
-				.replaceFragment(mainFragment2);
-		onView(withId(R.id.counter)).perform(click());
-		onView(withId(R.id.counter)).perform(click());
-		onView(withId(R.id.counter)).check(matches(withText(counterValue)));
-
-	}
 
 }
