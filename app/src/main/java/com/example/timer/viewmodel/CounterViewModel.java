@@ -10,15 +10,13 @@ import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
 
-import java.util.Timer;
-
 import javax.inject.Inject;
 
 /**
  * Created by ignacy on 23.11.17.
  */
 
-public class MainViewModel extends ViewModel {
+public class CounterViewModel extends ViewModel {
 
 	MutableLiveData<String> counter = new MutableLiveData<>();
 
@@ -26,10 +24,9 @@ public class MainViewModel extends ViewModel {
 	private ThreeByThreeScrambleGeneratorImpl generator = new ThreeByThreeScrambleGeneratorImpl();
 
 	private final TimeCounter timeCounter;
-	Timer t;
 
 	@Inject
-	public MainViewModel(TimeCounter timeCounter, ScoreDAO scoreDAO, AppExecutors executors) {
+	public CounterViewModel(TimeCounter timeCounter, ScoreDAO scoreDAO, AppExecutors executors) {
 		this.timeCounter = timeCounter;
 		this.scoreDAO = scoreDAO;
 		this.executors = executors;

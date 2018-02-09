@@ -1,6 +1,7 @@
 package com.example.timer.di;
 
-import com.example.timer.ui.main.MainFragment;
+import com.example.timer.ui.main.CounterFragment;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -9,8 +10,8 @@ import dagger.android.ContributesAndroidInjector;
  */
 
 @Module
-public abstract class MainFragmentModule {
+public abstract class CounterFragmentModule {
 
 	@ContributesAndroidInjector
-	abstract MainFragment contributeMainFragment();
+	abstract CounterFragment contributeScoreFragment();
 }

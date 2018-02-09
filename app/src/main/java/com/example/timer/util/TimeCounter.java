@@ -2,7 +2,7 @@ package com.example.timer.util;
 
 import android.arch.lifecycle.MutableLiveData;
 import com.example.timer.businesslogic.timeprovider.TimeProvider;
-import com.example.timer.viewmodel.MainViewModel;
+import com.example.timer.viewmodel.CounterViewModel;
 
 import javax.inject.Inject;
 import java.util.Timer;
@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 public class TimeCounter {
 
-	private MainViewModel viewModel;
+	private CounterViewModel viewModel;
 	private final TimeProvider provider;
 	long time1;
 	long time2;

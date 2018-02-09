@@ -8,7 +8,8 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
-import com.example.timer.viewmodel.MainViewModel;
+import com.example.timer.viewmodel.CounterViewModel;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,9 +23,9 @@ import static org.mockito.Mockito.mock;
  * Created by ignacy on 18.10.17.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class MainViewModelTest {
+public class CounterViewModelTest {
 
-	private MainViewModel viewModel;
+	private CounterViewModel viewModel;
 	private TimeCounter timeCounter;
 	private ScoreDAO scoreDAO;
 	private AppExecutors executors;
@@ -34,7 +35,7 @@ public class MainViewModelTest {
 		timeCounter = mock(TimeCounter.class);
 		scoreDAO = mock(ScoreDAO.class);
 		executors = mock(AppExecutors.class);
-		viewModel = new MainViewModel(timeCounter, scoreDAO, executors);
+		viewModel = new CounterViewModel(timeCounter, scoreDAO, executors);
 	}
 
 	@Test

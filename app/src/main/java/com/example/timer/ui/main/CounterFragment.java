@@ -12,19 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.timer.R;
-import com.example.timer.databinding.FragmentMainBinding;
-import com.example.timer.viewmodel.MainViewModel;
+import com.example.timer.databinding.FragmentCounterBinding;
+import com.example.timer.viewmodel.CounterViewModel;
 
 import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class MainFragment extends Fragment {
+public class CounterFragment extends Fragment {
 
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
-	private MainViewModel viewModel;
-	private FragmentMainBinding binding;
+	private CounterViewModel viewModel;
+	private FragmentCounterBinding binding;
 	private boolean counting;
 
 	@Override
@@ -37,7 +37,7 @@ public class MainFragment extends Fragment {
 	public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
-				.get(MainViewModel.class);
+				.get(CounterViewModel.class);
 		viewModel.getCounter()
 				.observe(this, counterValue -> {
 					binding.setCounter(counterValue);
@@ -55,7 +55,7 @@ public class MainFragment extends Fragment {
 	public View onCreateView(final LayoutInflater inflater,
 			@Nullable final ViewGroup container,
 			@Nullable final Bundle savedInstanceState) {
-		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
+		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_counter, container, false);
 		View view = binding.getRoot();
 		initViews(view);
 		return view;
