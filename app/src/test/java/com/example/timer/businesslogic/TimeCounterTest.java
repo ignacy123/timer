@@ -1,5 +1,7 @@
 package com.example.timer.businesslogic;
 
+import com.example.timer.businesslogic.timeprovider.TimeFormatter;
+import com.example.timer.businesslogic.timeprovider.TimeFormatterImpl;
 import com.example.timer.businesslogic.timeprovider.TimeProvider;
 import com.example.timer.businesslogic.timeprovider.TimeProviderImpl;
 import com.example.timer.util.TimeCounter;
@@ -16,13 +18,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TimeCounterTest {
 
 	@Test
-	public void formatsTime(){
+	public void formatsTime() {
 		TimeProvider provider = new TimeProviderImpl();
-		TimeCounter counter = new TimeCounter(provider);
+		TimeFormatter formatter = new TimeFormatterImpl();
+		TimeCounter counter = new TimeCounter(provider, formatter);
 		long a = 6000;
 		assertThat(counter.returnFormattedTime(a), is("6.000"));
 		a = 65003;
-		assertThat(counter.returnFormattedTime(a), is("1:5.003"));
+		assertThat(counter.returnFormattedTime(a), is("1:05.003"));
 
 	}
 

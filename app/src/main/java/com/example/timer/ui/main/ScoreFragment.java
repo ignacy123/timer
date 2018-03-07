@@ -13,7 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.timer.R;
+import com.example.timer.model.Score;
 import com.example.timer.viewmodel.ScoreViewModel;
+
+import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -60,7 +64,12 @@ public class ScoreFragment extends Fragment {
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(ScoreViewModel.class);
 		viewModel.getScores()
-				.observe(this, scores -> adapter.setScores(scores));
+				.observe(this, scores -> rotateAndSetScores(scores));
+	}
+
+	private void rotateAndSetScores(List<Score> scores) {
+		Collections.reverse(scores);
+		adapter.setScores(scores);
 	}
 
 	@Override

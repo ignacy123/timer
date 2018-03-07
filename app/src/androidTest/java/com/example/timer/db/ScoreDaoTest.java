@@ -40,7 +40,7 @@ public class ScoreDaoTest extends DbTest {
 	}
 
 	@Test
-	public void insertsAndFetchesTwoIndeticalScores() throws InterruptedException {
+	public void insertsAndFetchesTwoIdenticalScores() throws InterruptedException {
 		Score score = new Score("wddwdwdw", 6000, "");
 		db.scoreDao()
 				.persist(score);

@@ -62,7 +62,7 @@ public class CounterFragment extends Fragment {
 	}
 
 	private void initViews(final View view) {
-		view.findViewById(R.id.counter)
+		view.findViewById(R.id.areaToClick)
 				.setOnClickListener(v -> startCounting());
 	}
 
