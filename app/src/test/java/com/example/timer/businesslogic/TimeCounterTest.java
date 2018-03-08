@@ -19,6 +19,10 @@ public class TimeCounterTest {
 
 	@Test
 	public void formatsTime() {
+		// TODO REVIEW to nie jest poprawny test jednostkowy
+		// zaleznosci (provider i formatter) powinny byc mockami,
+		// tutaj powinienes testować jedynie interakcje (czy sa wywolywane poprawne metody w zaleznosciach)
+		// testy czy formatter poprawnie formatuje powinny byc w ramach osobnej klasy dotyczacej tylko formattera
 		TimeProvider provider = new TimeProviderImpl();
 		TimeFormatter formatter = new TimeFormatterImpl();
 		TimeCounter counter = new TimeCounter(provider, formatter);

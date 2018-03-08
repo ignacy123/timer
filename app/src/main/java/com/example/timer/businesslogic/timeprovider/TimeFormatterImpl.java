@@ -1,10 +1,9 @@
 package com.example.timer.businesslogic.timeprovider;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by ignacy on 07.03.18.
@@ -20,6 +19,7 @@ public class TimeFormatterImpl implements TimeFormatter {
 
 	@Override
 	public String formatTime(long timeToFormat) {
+		// TODO REVIEW - DRY - trzy razy powtórzone (new SimpleDateFormat(...)).format(new Date(timeToFormat))
 		if (timeToFormat < 10000) {
 			return (new SimpleDateFormat("s.SSS")).format(new Date(timeToFormat));
 		}
