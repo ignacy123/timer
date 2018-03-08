@@ -17,15 +17,18 @@ public class TimeFormatterImpl implements TimeFormatter {
 
 	}
 
-	@Override
-	public String formatTime(long timeToFormat) {
-		// TODO REVIEW - DRY - trzy razy powtórzone (new SimpleDateFormat(...)).format(new Date(timeToFormat))
+
+	public String chooseTimeFormat(long timeToFormat) {
 		if (timeToFormat < 10000) {
-			return (new SimpleDateFormat("s.SSS")).format(new Date(timeToFormat));
+			return formatTime("s.SSS", timeToFormat);
 		}
 		if (timeToFormat < 60000) {
-			return (new SimpleDateFormat("ss.SSS")).format(new Date(timeToFormat));
+			return formatTime("ss.SSS", timeToFormat);
 		}
-		return (new SimpleDateFormat("m:ss.SSS")).format(new Date(timeToFormat));
+		return formatTime("m:ss.SSS", timeToFormat);
+	}
+
+	public String formatTime(String pattern, long timeToFormat){
+		return new SimpleDateFormat(pattern).format(new Date(timeToFormat));
 	}
 }

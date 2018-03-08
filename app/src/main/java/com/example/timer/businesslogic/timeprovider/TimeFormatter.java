@@ -5,5 +5,6 @@ package com.example.timer.businesslogic.timeprovider;
  */
 
 public interface TimeFormatter {
-	String formatTime(long timeToFormat);
+
+	String chooseTimeFormat(long timeToFormat);
 }
