@@ -4,6 +4,8 @@ package com.example.timer.di;
  * Created by ignacy on 16.01.18.
  */
 
+import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
+import com.example.timer.businesslogic.timeprovider.StatisticsGeneratorImpl;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGenerator;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.businesslogic.timeprovider.TimeFormatter;
@@ -25,4 +27,7 @@ abstract class BusinessLogicModule {
 
 	@Binds
 	abstract ThreeByThreeScrambleGenerator threeByThreeScrambleGenerator(ThreeByThreeScrambleGeneratorImpl threeByThreeScrambleGenerator);
+
+	@Binds
+	abstract StatisticsGenerator statisticsGenerator(StatisticsGeneratorImpl statisticsGenerator);
 }

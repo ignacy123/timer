@@ -5,6 +5,8 @@ package com.example.timer;
  */
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
+
+import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
 import com.example.timer.sql.ScoreDAO;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
@@ -29,13 +31,15 @@ public class CounterViewModelTest {
 	private TimeCounter timeCounter;
 	private ScoreDAO scoreDAO;
 	private AppExecutors executors;
+	private StatisticsGenerator statisticsGenerator;
 
 	@Before
 	public void setUp() {
 		timeCounter = mock(TimeCounter.class);
 		scoreDAO = mock(ScoreDAO.class);
 		executors = mock(AppExecutors.class);
-		viewModel = new CounterViewModel(timeCounter, scoreDAO, executors);
+		statisticsGenerator = mock(StatisticsGenerator.class);
+		viewModel = new CounterViewModel(timeCounter, scoreDAO, executors, statisticsGenerator);
 	}
 
 	@Test

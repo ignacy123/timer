@@ -48,6 +48,33 @@ public class CounterFragment extends Fragment {
 					binding.setScramble(scrambleValue);
 					binding.executePendingBindings();
 				});
+		viewModel.getMo3()
+				.observe(this, mo3value -> {
+					binding.setMo3(mo3value);
+					binding.executePendingBindings();
+				});
+		viewModel.getAvg5()
+				.observe(this, avg5value -> {
+					binding.setMo3(avg5value);
+					binding.executePendingBindings();
+				});
+		viewModel.getAvg12()
+				.observe(this, avg12value -> {
+					binding.setMo3(avg12value);
+					binding.executePendingBindings();
+				});
+		viewModel.getAvg50()
+				.observe(this, avg50value -> {
+					binding.setMo3(avg50value);
+					binding.executePendingBindings();
+				});
+		viewModel.getAvg100()
+				.observe(this, avg100value -> {
+					binding.setMo3(avg100value);
+					binding.executePendingBindings();
+				});
+		viewModel.getScores()
+				.observe(this, scores -> viewModel.updateAverages(scores));
 	}
 
 	@Nullable

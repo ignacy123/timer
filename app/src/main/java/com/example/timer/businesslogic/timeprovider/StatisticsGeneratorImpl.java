@@ -7,14 +7,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Created by ignacy on 08.03.18.
  */
-
+@Singleton
 public class StatisticsGeneratorImpl implements StatisticsGenerator {
 
 	private Statistics statistics = new Statistics();
 	private List<Long> times = new ArrayList<>();
+
+	@Inject
+	public StatisticsGeneratorImpl() {
+	}
 
 	@Override
 	public Statistics generateAverages(List<Score> scores) {
