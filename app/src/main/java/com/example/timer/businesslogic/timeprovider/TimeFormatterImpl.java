@@ -1,9 +1,10 @@
 package com.example.timer.businesslogic.timeprovider;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by ignacy on 07.03.18.
@@ -17,26 +18,18 @@ public class TimeFormatterImpl implements TimeFormatter {
 
 	}
 
+	public String formatTime(long timeToFormat) {
+		return new SimpleDateFormat(generatePattern(timeToFormat)).format(new Date(timeToFormat));
+	}
 
-	public String chooseTimeFormat(long timeToFormat) {
-		// TODO REVIEW - DRY - zmieniłeś ale ciągle masz trzy razy powtórzone: "return formatTime(..., timeToFormat)"
-		// Nie myśl, że sie czepiam.  W praktyce zawsze powinieneś dążyć do eliminowania zduplikowanego kodu.
-		// W tym przypadku jedynym co się zmienia jest pattern, więc powinienieś to tak przerobić
-		// żeby tylko pattern był wyliczany w zależności od timeToFormat np. w osobnej metodzie i całość się uprości.
-		//
-		// Usunięcie zduplikowanego kodu to jeden z ważniejszych kroków cyklu TDD :
-		// https://en.wikipedia.org/wiki/Test-driven_development#Test-driven_development_cycle
-
+	private String generatePattern(long timeToFormat) {
 		if (timeToFormat < 10000) {
-			return formatTime("s.SSS", timeToFormat);
+			return "s.SSS";
 		}
 		if (timeToFormat < 60000) {
-			return formatTime("ss.SSS", timeToFormat);
+			return "ss.SSS";
 		}
-		return formatTime("m:ss.SSS", timeToFormat);
+		return "m:ss.SSS";
 	}
 
-	public String formatTime(String pattern, long timeToFormat){
-		return new SimpleDateFormat(pattern).format(new Date(timeToFormat));
-	}
 }

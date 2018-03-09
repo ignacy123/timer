@@ -1,5 +1,6 @@
 package com.example.timer.ui.main;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -23,7 +24,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.AndroidSupportInjection;
 
-public class ScoreFragment extends Fragment {
+public class ScoreFragment extends Fragment implements MyScoreRecyclerViewAdapter.ScoreLongClickListener {
 
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
@@ -31,7 +32,7 @@ public class ScoreFragment extends Fragment {
 
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	RecyclerView recyclerView;
-	private MyScoreRecyclerViewAdapter adapter = new MyScoreRecyclerViewAdapter();
+	private MyScoreRecyclerViewAdapter adapter = new MyScoreRecyclerViewAdapter(this);
 
 	/**
 	 * Mandatory empty constructor for the fragment manager to instantiate the
@@ -40,8 +41,6 @@ public class ScoreFragment extends Fragment {
 	public ScoreFragment() {
 	}
 
-	// TODO: Customize parameter initialization
-	@SuppressWarnings("unused")
 	public static ScoreFragment newInstance(int columnCount) {
 		ScoreFragment fragment = new ScoreFragment();
 		Bundle args = new Bundle();
@@ -78,4 +77,13 @@ public class ScoreFragment extends Fragment {
 		super.onAttach(context);
 	}
 
+	@Override
+	public void onLongClick(Score score) {
+
+		new AlertDialog.Builder(getContext())//
+				.setMessage("Do you want to remove this time?")//TODO
+				.setPositiveButton("Yes", (dialogInterface, i) -> viewModel.removeScore(score))
+				.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss())
+				.show();
+	}
 }

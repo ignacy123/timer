@@ -2,6 +2,7 @@ package com.example.timer.businesslogic;
 
 import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
 import com.example.timer.businesslogic.timeprovider.StatisticsGeneratorImpl;
+import com.example.timer.businesslogic.timeprovider.TimeFormatterImpl;
 import com.example.timer.model.Score;
 import com.example.timer.model.Statistics;
 
@@ -19,7 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StatisticsGeneratorTest {
 
-	StatisticsGenerator generator = new StatisticsGeneratorImpl();
+	StatisticsGenerator generator = new StatisticsGeneratorImpl(new TimeFormatterImpl());
 	List<Score> scores = new ArrayList<>();
 
 	@Test
@@ -31,11 +32,11 @@ public class StatisticsGeneratorTest {
 		}
 
 		Statistics statistics = generator.generateAverages(scores);
-		assertThat(statistics.getMo3(), is(1000.0));
-		assertThat(statistics.getAvg5(), is(1000.0));
-		assertThat(statistics.getAvg12(), is(1000.0));
-		assertThat(statistics.getAvg50(), is(1000.0));
-		assertThat(statistics.getAvg100(), is(1000.0));
+		assertThat(statistics.getMo3(), is("1.000"));
+		assertThat(statistics.getAvg5(), is("1.000"));
+		assertThat(statistics.getAvg12(), is("1.000"));
+		assertThat(statistics.getAvg50(), is("1.000"));
+		assertThat(statistics.getAvg100(), is("1.000"));
 
 	}
 
@@ -47,8 +48,8 @@ public class StatisticsGeneratorTest {
 		scores.add(new Score("", 50, ""));
 
 		Statistics statistics = generator.generateAverages(scores);
-		assertThat(statistics.getMo3(), is(383.0));
-		assertThat(statistics.getAvg5(), is(700.0));
+		assertThat(statistics.getMo3(), is("0.383"));
+		assertThat(statistics.getAvg5(), is("0.700"));
 
 	}
 

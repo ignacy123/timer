@@ -6,59 +6,58 @@ package com.example.timer.model;
 
 public class Statistics {
 
-	// TODO REVIEW - trochę słabo ponazywane zmienne. Mile widziane nazwy które precyzyjniej oddają co jest czym.
-	double Single;
-	double mo3;
-	double avg5;
-	double avg12;
-	double avg50;
-	double avg100;
+	String Single;
+	String mo3;
+	String avg5;
+	String avg12;
+	String avg50;
+	String avg100;
 
-	public double getSingle() {
+	public String getSingle() {
 		return Single;
 	}
 
-	public void setSingle(double single) {
+	public void setSingle(String single) {
 		Single = single;
 	}
 
-	public double getMo3() {
+	public String getMo3() {
 		return mo3;
 	}
 
-	public void setMo3(double mo3) {
+	public void setMo3(String mo3) {
 		this.mo3 = mo3;
 	}
 
-	public double getAvg5() {
+	public String getAvg5() {
 		return avg5;
 	}
 
-	public void setAvg5(double avg5) {
+	public void setAvg5(String avg5) {
 		this.avg5 = avg5;
 	}
 
-	public double getAvg12() {
+	public String getAvg12() {
 		return avg12;
 	}
 
-	public void setAvg12(double avg12) {
+	public void setAvg12(String avg12) {
 		this.avg12 = avg12;
 	}
 
-	public double getAvg50() {
+	public String getAvg50() {
 		return avg50;
 	}
 
-	public void setAvg50(double avg50) {
+	public void setAvg50(String avg50) {
 		this.avg50 = avg50;
 	}
 
-	public double getAvg100() {
+	public String getAvg100() {
 		return avg100;
 	}
 
-	public void setAvg100(double avg100) {
+	public void setAvg100(String avg100) {
 		this.avg100 = avg100;
 	}
 }

@@ -18,9 +18,9 @@ public class TestFormatterTest {
 	public void formatsTime() {
 		TimeFormatter formatter = new TimeFormatterImpl();
 		long a = 6000;
-		assertThat(formatter.chooseTimeFormat(a), is("6.000"));
+		assertThat(formatter.formatTime(a), is("6.000"));
 		a = 65003;
-		assertThat(formatter.chooseTimeFormat(a), is("1:05.003"));
+		assertThat(formatter.formatTime(a), is("1:05.003"));
 
 	}
 

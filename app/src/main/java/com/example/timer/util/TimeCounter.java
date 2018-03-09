@@ -54,7 +54,7 @@ public class TimeCounter {
 	}
 
 	public String returnFormattedTime(long timeToFormat) {
-		return formater.chooseTimeFormat(timeToFormat);
+		return formater.formatTime(timeToFormat);
 	}
 
 	public long provideDifference() {

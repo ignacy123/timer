@@ -10,12 +10,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.timer.R;
 import com.example.timer.databinding.FragmentCounterBinding;
 import com.example.timer.viewmodel.CounterViewModel;
-import dagger.android.support.AndroidSupportInjection;
 
 import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 public class CounterFragment extends Fragment {
 
@@ -46,35 +48,11 @@ public class CounterFragment extends Fragment {
 					binding.setScramble(scrambleValue);
 					binding.executePendingBindings();
 				});
-		viewModel.getMo3()
-				.observe(this, mo3value -> {
-					binding.setMo3(mo3value);
+		viewModel.getStatistics()
+				.observe(this, statistics -> {
+					binding.setStatistics(statistics);
 					binding.executePendingBindings();
 				});
-		viewModel.getAvg5()
-				.observe(this, avg5value -> {
-					binding.setMo3(avg5value);
-					binding.executePendingBindings();
-				});
-		viewModel.getAvg12()
-				.observe(this, avg12value -> {
-					binding.setMo3(avg12value);
-					binding.executePendingBindings();
-				});
-		viewModel.getAvg50()
-				.observe(this, avg50value -> {
-					binding.setMo3(avg50value);
-					binding.executePendingBindings();
-				});
-		viewModel.getAvg100()
-				.observe(this, avg100value -> {
-					binding.setMo3(avg100value);
-					binding.executePendingBindings();
-				});
-		// TODO REVIEW obserwujesz score w viewModel, tylko po to żeby spowrotem przekazać to do viewModel :)
-		// więcej uwag w CounterViewModel
-		viewModel.getScores()
-				.observe(this, scores -> viewModel.updateAverages(scores));
 	}
 
 	@Nullable

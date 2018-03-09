@@ -23,7 +23,7 @@ public class TimeCounterTest {
 		TimeCounter counter = new TimeCounter(provider, formatter);
 		long a = 6000;
 		counter.returnFormattedTime(a);
-		verify(formatter, times(1)).chooseTimeFormat(a);
+		verify(formatter, times(1)).formatTime(a);
 
 	}
 

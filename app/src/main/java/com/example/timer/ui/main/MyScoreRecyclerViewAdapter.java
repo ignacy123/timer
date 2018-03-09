@@ -1,5 +1,6 @@
 package com.example.timer.ui.main;
 
+import android.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,10 @@ import java.util.List;
 public class MyScoreRecyclerViewAdapter extends RecyclerView.Adapter<MyScoreRecyclerViewAdapter.ViewHolder> {
 
 	private List<Score> scores = new ArrayList<>();
+	private ScoreLongClickListener scoreLongClickListener;
 
-	public MyScoreRecyclerViewAdapter() {
-
+	public MyScoreRecyclerViewAdapter(ScoreLongClickListener scoreLongClickListener) {
+		this.scoreLongClickListener = scoreLongClickListener;
 	}
 
 	public void setScores(List<Score> scores) {
@@ -35,6 +37,10 @@ public class MyScoreRecyclerViewAdapter extends RecyclerView.Adapter<MyScoreRecy
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, int position) {
 		Score score = scores.get(position);
+		holder.itemView.setOnLongClickListener(view -> {
+			scoreLongClickListener.onLongClick(score);
+			return true;
+		});
 		holder.mTimeView.setText(score.getFormattedTime());
 		holder.mScrambleView.setText(score.getScramble());
 
@@ -62,5 +68,9 @@ public class MyScoreRecyclerViewAdapter extends RecyclerView.Adapter<MyScoreRecy
 		public String toString() {
 			return super.toString() + " '" + mScrambleView.getText() + "'";
 		}
+	}
+
+	public interface ScoreLongClickListener {
+		void onLongClick(Score score);
 	}
 }

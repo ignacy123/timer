@@ -14,24 +14,8 @@
             type="String" />
 
         <variable
-            name="mo3"
-            type="String" />
-
-        <variable
-            name="avg5"
-            type="String" />
-
-        <variable
-            name="avg12"
-            type="String" />
-
-        <variable
-            name="avg50"
-            type="String" />
-
-        <variable
-            name="avg100"
-            type="String" />
+            name="statistics"
+            type="com.example.timer.model.Statistics" />
 
     </data>
 
@@ -71,13 +55,11 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="155dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Mo3"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toStartOf="@+id/mo3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/mo3" />
 
@@ -120,48 +102,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="149dp"
-            android:text="@{mo3}"
+            android:text="@{statistics.mo3}"
             app:layout_constraintBottom_toTopOf="@+id/avg5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView" />
+            tools:text="mo3" />
 
         <TextView
             android:id="@+id/avg5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{avg5}"
+            android:text="@{statistics.avg5}"
             app:layout_constraintBottom_toTopOf="@+id/avg12"
-            app:layout_constraintEnd_toStartOf="@+id/mo3"
-            app:layout_constraintStart_toStartOf="@+id/mo3" />
+            app:layout_constraintEnd_toEndOf="@+id/mo3"
+            tools:text="avg5" />
 
         <TextView
             android:id="@+id/avg12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{avg12}"
+            android:text="@{statistics.avg12}"
             app:layout_constraintBottom_toTopOf="@+id/avg50"
-            app:layout_constraintEnd_toStartOf="@+id/avg5"
-            app:layout_constraintStart_toStartOf="@+id/avg5" />
+            app:layout_constraintEnd_toEndOf="@+id/mo3"
+            tools:text="avg12" />
 
         <TextView
             android:id="@+id/avg50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="@{avg50}"
+            android:text="@{statistics.avg50}"
             app:layout_constraintBottom_toTopOf="@+id/avg100"
-            app:layout_constraintEnd_toStartOf="@+id/avg12"
-            app:layout_constraintStart_toStartOf="@+id/avg12" />
+            app:layout_constraintEnd_toEndOf="@+id/mo3"
+            tools:text="avg50" />
 
         <TextView
             android:id="@+id/avg100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="74dp"
-            android:text="@{avg100}"
+            android:layout_marginBottom="16dp"
+            android:text="@{statistics.avg100}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/avg50"
-            app:layout_constraintStart_toStartOf="@+id/avg50" />
+            app:layout_constraintEnd_toEndOf="@+id/mo3"
+            tools:text="avg100" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
