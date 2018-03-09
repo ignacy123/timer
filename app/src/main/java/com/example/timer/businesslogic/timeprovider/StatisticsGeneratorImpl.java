@@ -3,12 +3,11 @@ package com.example.timer.businesslogic.timeprovider;
 import com.example.timer.model.Score;
 import com.example.timer.model.Statistics;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * Created by ignacy on 08.03.18.
@@ -39,6 +38,7 @@ public class StatisticsGeneratorImpl implements StatisticsGenerator {
 		if (times.size() < 3) {
 			return 0;
 		}
+		// TODO REVIEW - poniższe mógłbyś zapisać inaczej. Zastanów się jak. Na razie nie podpowiadam.
 		return (times.get(times.size() - 1) + times.get(times.size() - 2) + times.get(times.size() - 3)) / 3;
 	}
 
@@ -50,11 +50,23 @@ public class StatisticsGeneratorImpl implements StatisticsGenerator {
 	}
 
 	private double getSingle(List<Long> times) {
+		// TODO REVIEW - appka mi się crashuje od razu po wejściu, nie mam żadnych wyników, pewnie dlatego
+		//		java.util.NoSuchElementException
+		//		at java.util.ArrayList$ArrayListIterator.next(ArrayList.java:576)
+		//		at java.util.Collections.min(Collections.java:1654)
+		//		at com.example.timer.businesslogic.timeprovider.StatisticsGeneratorImpl.getSingle(StatisticsGeneratorImpl.java:53)
+		//		at com.example.timer.businesslogic.timeprovider.StatisticsGeneratorImpl.generateAverages(StatisticsGeneratorImpl.java:28)
+		//		at com.example.timer.viewmodel.CounterViewModel.updateAverages(CounterViewModel.java:108)
+		//		at com.example.timer.ui.main.CounterFragment.lambda$onActivityCreated$7$CounterFragment(CounterFragment.java:77)
+		//		at com.example.timer.ui.main.CounterFragment$$Lambda$7.onChanged(Unknown Source)
+
 		return Collections.min(times);
 	}
 
 	private double countAverageOf(int length) {
 		List<Long> avgTimes = new ArrayList<>();
+		// TODO REVIEW - Ciężko mi się to czyta. Wydaje mi się, że też da się to trochę ładniej zapisać.
+		// Ale najpierw zastanów się nad tym z getMo3
 		if (times.size() >= length - 1) {
 			if (times.size() == length - 1) {
 				for (int i = 0; i < length - 1; i++) {

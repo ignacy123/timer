@@ -5,6 +5,8 @@ package com.example.timer.model;
  */
 
 public class Statistics {
+
+	// TODO REVIEW - trochę słabo ponazywane zmienne. Mile widziane nazwy które precyzyjniej oddają co jest czym.
 	double Single;
 	double mo3;
 	double avg5;

@@ -10,14 +10,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.timer.R;
 import com.example.timer.databinding.FragmentCounterBinding;
 import com.example.timer.viewmodel.CounterViewModel;
+import dagger.android.support.AndroidSupportInjection;
 
 import javax.inject.Inject;
-
-import dagger.android.support.AndroidSupportInjection;
 
 public class CounterFragment extends Fragment {
 
@@ -73,6 +71,8 @@ public class CounterFragment extends Fragment {
 					binding.setMo3(avg100value);
 					binding.executePendingBindings();
 				});
+		// TODO REVIEW obserwujesz score w viewModel, tylko po to żeby spowrotem przekazać to do viewModel :)
+		// więcej uwag w CounterViewModel
 		viewModel.getScores()
 				.observe(this, scores -> viewModel.updateAverages(scores));
 	}

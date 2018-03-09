@@ -19,6 +19,14 @@ public class TimeFormatterImpl implements TimeFormatter {
 
 
 	public String chooseTimeFormat(long timeToFormat) {
+		// TODO REVIEW - DRY - zmieniłeś ale ciągle masz trzy razy powtórzone: "return formatTime(..., timeToFormat)"
+		// Nie myśl, że sie czepiam.  W praktyce zawsze powinieneś dążyć do eliminowania zduplikowanego kodu.
+		// W tym przypadku jedynym co się zmienia jest pattern, więc powinienieś to tak przerobić
+		// żeby tylko pattern był wyliczany w zależności od timeToFormat np. w osobnej metodzie i całość się uprości.
+		//
+		// Usunięcie zduplikowanego kodu to jeden z ważniejszych kroków cyklu TDD :
+		// https://en.wikipedia.org/wiki/Test-driven_development#Test-driven_development_cycle
+
 		if (timeToFormat < 10000) {
 			return formatTime("s.SSS", timeToFormat);
 		}
