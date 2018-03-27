@@ -6,10 +6,9 @@ package com.example.timer.di;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
-
 import com.example.timer.viewmodel.CounterViewModel;
 import com.example.timer.viewmodel.ScoreViewModel;
-
+import com.example.timer.viewmodel.StatisticsViewModel;
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
@@ -26,6 +25,11 @@ abstract class ViewModelModule {
 	@IntoMap
 	@ViewModelKey(ScoreViewModel.class)
 	abstract ViewModel bindScoreFragmentViewModel(ScoreViewModel viewModel);
+
+	@Binds
+	@IntoMap
+	@ViewModelKey(StatisticsViewModel.class)
+	abstract ViewModel bindStatisticsViewModel(StatisticsViewModel viewModel);
 
 	@Binds
 	abstract ViewModelProvider.Factory bindViewModelFactory(AppViewModelFactory factory);
