@@ -4,12 +4,14 @@ import com.example.timer.model.Score;
 import com.example.timer.model.Statistics;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ignacy on 08.03.18.
  */
 
 public interface StatisticsGenerator {
+
 	public Statistics generateAverages(List<Score> scores);
+
+	public Statistics getBestAverages();
 }

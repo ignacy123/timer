@@ -53,4 +53,21 @@ public class StatisticsGeneratorTest {
 
 	}
 
+	@Test
+	public void countsBestAverages() {
+		scores.clear();
+		Score dummyScore = new Score("", 1000, "");
+
+		for (int i = 0; i <= 200; i++) {
+			scores.add(dummyScore);
+		}
+		Statistics statistics = generator.generateAverages(scores);
+		statistics = generator.getBestAverages();
+		assertThat(statistics.getMo3(), is("1.000"));
+		assertThat(statistics.getAvg5(), is("1.000"));
+		assertThat(statistics.getAvg12(), is("1.000"));
+		assertThat(statistics.getAvg50(), is("1.000"));
+		assertThat(statistics.getAvg100(), is("1.000"));
+	}
+
 }

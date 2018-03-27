@@ -17,6 +17,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 	@Override
 	public Fragment getItem(int position) {
 		if (position == 0) {
+			return new StatisticsFragment();
+		}
+		if (position == 1) {
 			return new CounterFragment();
 		}
 		return new ScoreFragment();
@@ -25,6 +28,6 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return 2;
+		return 3;
 	}
 }

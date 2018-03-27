@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 
 		if (null == savedInstanceState) {
 			pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+			pager.setCurrentItem(1);
 		}
 
 	}
