@@ -10,19 +10,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.timer.R;
-import com.example.timer.databinding.FragmentStatisticsBinding;
+import com.example.timer.databinding.FragmentCounterBinding;
 import com.example.timer.viewmodel.StatisticsViewModel;
-import dagger.android.support.AndroidSupportInjection;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import javax.inject.Inject;
+
+import dagger.android.support.AndroidSupportInjection;
 
 public class StatisticsFragment extends Fragment {
 
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private StatisticsViewModel viewModel;
-	private FragmentStatisticsBinding binding;
+	private FragmentCounterBinding binding;
 
 	public StatisticsFragment() {
 
@@ -39,6 +44,15 @@ public class StatisticsFragment extends Fragment {
 
 	@Override
 	public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
+		GraphView graph = (GraphView) findViewById(R.id.graph);
+		LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+				new DataPoint(0, 1),
+				new DataPoint(1, 5),
+				new DataPoint(2, 3),
+				new DataPoint(3, 2),
+				new DataPoint(4, 6)
+		});
+		graph.addSeries(series);
 		super.onActivityCreated(savedInstanceState);
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(StatisticsViewModel.class);
