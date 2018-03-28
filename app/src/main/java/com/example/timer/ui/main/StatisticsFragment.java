@@ -10,21 +10,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.timer.R;
-import com.example.timer.databinding.FragmentCounterBinding;
+import com.example.timer.databinding.FragmentStatisticsBinding;
 import com.example.timer.viewmodel.StatisticsViewModel;
+import dagger.android.support.AndroidSupportInjection;
 
 import javax.inject.Inject;
-
-import dagger.android.support.AndroidSupportInjection;
 
 public class StatisticsFragment extends Fragment {
 
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private StatisticsViewModel viewModel;
-	private FragmentCounterBinding binding;
+	private FragmentStatisticsBinding binding;
 
 	public StatisticsFragment() {
 
