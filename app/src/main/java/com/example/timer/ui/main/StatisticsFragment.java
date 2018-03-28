@@ -34,7 +34,7 @@ public class StatisticsFragment extends Fragment {
 	public View onCreateView(final LayoutInflater inflater,
 			@Nullable final ViewGroup container,
 			@Nullable final Bundle savedInstanceState) {
-		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_counter, container, false);
+		binding = DataBindingUtil.inflate(inflater, R.layout.fragment_statistics, container, false);
 		View view = binding.getRoot();
 		return view;
 	}

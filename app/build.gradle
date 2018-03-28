@@ -45,6 +45,7 @@ dependencies {
     compile 'com.google.dagger:dagger-android:2.14.1'
     compile 'com.google.dagger:dagger-android-support:2.14.1'
     compile 'com.google.guava:guava:19.0'
+    compile 'com.jjoe64:graphview:4.2.1'
 
     annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
