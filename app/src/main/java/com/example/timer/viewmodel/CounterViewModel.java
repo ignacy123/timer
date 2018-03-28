@@ -9,11 +9,10 @@ import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.model.Score;
 import com.example.timer.model.Statistics;
-import com.example.timer.sql.ScoreDAO;
+import com.example.timer.sql.ScoreDao;
+import com.example.timer.sql.StatisticsDao;
 import com.example.timer.util.AppExecutors;
 import com.example.timer.util.TimeCounter;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,15 +29,21 @@ public class CounterViewModel extends ViewModel {
 	private ThreeByThreeScrambleGeneratorImpl generator = new ThreeByThreeScrambleGeneratorImpl();
 
 	private StatisticsGenerator statisticsGenerator;
+	private StatisticsDao statisticsDao;
 
 	private final TimeCounter timeCounter;
 
 	@Inject
-	public CounterViewModel(TimeCounter timeCounter, ScoreDAO scoreDAO, AppExecutors executors, StatisticsGenerator statisticsGenerator) {
+	public CounterViewModel(TimeCounter timeCounter,
+			ScoreDao scoreDao,
+			AppExecutors executors,
+			StatisticsGenerator statisticsGenerator,
+			StatisticsDao statisticsDao) {
 		this.timeCounter = timeCounter;
-		this.scoreDAO = scoreDAO;
+		this.scoreDao = scoreDao;
 		this.executors = executors;
 		this.statisticsGenerator = statisticsGenerator;
+		this.statisticsDao = statisticsDao;
 		scramble.postValue(generator.generate());
 	}
 
@@ -51,10 +56,17 @@ public class CounterViewModel extends ViewModel {
 	}
 
 	public LiveData<Statistics> getStatistics() {
-		return Transformations.map(scoreDAO.fetch(), scores -> statisticsGenerator.generateAverages(scores));
+		return Transformations.map(scoreDao.fetch(), scores -> {
+
+			Statistics statistics = statisticsGenerator.generateAverages(scores);
+			executors.diskIO()
+					.execute(() -> statisticsDao.persist(statistics));
+			return statistics;
+
+		});
 	}
 
-	ScoreDAO scoreDAO;
+	ScoreDao scoreDao;
 	AppExecutors executors;
 
 	public void startCounting() {
@@ -69,7 +81,7 @@ public class CounterViewModel extends ViewModel {
 		Score score = new Score(scramble.getValue(), l, timeCounter.getFormattedTime());
 		counter.postValue(String.valueOf(timeCounter.getFormattedTime()));
 		executors.diskIO()
-				.execute(() -> scoreDAO.persist(score));
+				.execute(() -> scoreDao.persist(score));
 		scramble.postValue(generator.generate());
 
 	}

@@ -6,23 +6,19 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.example.timer.model.Score;
+import com.example.timer.model.Statistics;
 
 /**
  * Created by ignacy on 22.12.17.
  */
-@Database(entities = { Score.class }, version = 1)
+@Database(entities = { Score.class, Statistics.class }, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
 	private static AppDatabase instance;
 
-	public static final AppDatabase getInstance(Context context) {
-		if (instance == null) {
-			instance = Room.databaseBuilder(context, AppDatabase.class, "timer-database")
-					.build();
-		}
-		return instance;
-	}
+	public abstract ScoreDao scoreDao();
 
-	public abstract ScoreDAO scoreDao();
+	public abstract StatisticsDao statisticsDao();
+
 }
 

@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="149dp"
-            android:text="@{statistics.mo3}"
+            android:text="@{statistics.formattedMo3}"
             app:layout_constraintBottom_toTopOf="@+id/avg5"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="mo3" />
@@ -111,7 +111,7 @@
             android:id="@+id/avg5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{statistics.avg5}"
+            android:text="@{statistics.formattedAvg5}"
             app:layout_constraintBottom_toTopOf="@+id/avg12"
             app:layout_constraintEnd_toEndOf="@+id/mo3"
             tools:text="avg5" />
@@ -120,7 +120,7 @@
             android:id="@+id/avg12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{statistics.avg12}"
+            android:text="@{statistics.formattedAvg12}"
             app:layout_constraintBottom_toTopOf="@+id/avg50"
             app:layout_constraintEnd_toEndOf="@+id/mo3"
             tools:text="avg12" />
@@ -130,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:text="@{statistics.avg50}"
+            android:text="@{statistics.formattedAvg50}"
             app:layout_constraintBottom_toTopOf="@+id/avg100"
             app:layout_constraintEnd_toEndOf="@+id/mo3"
             tools:text="avg50" />
@@ -140,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@{statistics.avg100}"
+            android:text="@{statistics.formattedAvg100}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/mo3"
             tools:text="avg100" />

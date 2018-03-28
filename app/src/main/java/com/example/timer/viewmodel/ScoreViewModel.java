@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.timer.model.Score;
-import com.example.timer.sql.ScoreDAO;
+import com.example.timer.sql.ScoreDao;
 import com.example.timer.util.AppExecutors;
 
 import java.util.List;
@@ -17,11 +17,11 @@ import javax.inject.Inject;
 
 public class ScoreViewModel extends ViewModel {
 
-	private final ScoreDAO dao;
+	private final ScoreDao dao;
 	private final AppExecutors executors;
 
 	@Inject
-	public ScoreViewModel(ScoreDAO dao, AppExecutors executors) {
+	public ScoreViewModel(ScoreDao dao, AppExecutors executors) {
 		this.dao = dao;
 		this.executors = executors;
 	}

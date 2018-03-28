@@ -13,5 +13,4 @@ public interface StatisticsGenerator {
 
 	public Statistics generateAverages(List<Score> scores);
 
-	public Statistics getBestAverages();
 }

@@ -8,7 +8,8 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 
 import com.example.timer.sql.AppDatabase;
-import com.example.timer.sql.ScoreDAO;
+import com.example.timer.sql.ScoreDao;
+import com.example.timer.sql.StatisticsDao;
 
 import javax.inject.Singleton;
 
@@ -22,13 +23,20 @@ class AppModule {
 	@Provides
 	AppDatabase provideDb(Application app) {
 		return Room.databaseBuilder(app, AppDatabase.class, "timer.db")
+				.fallbackToDestructiveMigration()
 				.build();
 	}
 
 	@Singleton
 	@Provides
-	ScoreDAO provideScoreDAO(AppDatabase db) {
+	ScoreDao provideScoreDAO(AppDatabase db) {
 		return db.scoreDao();
+	}
+
+	@Singleton
+	@Provides
+	StatisticsDao provideStatisticsDAO(AppDatabase db) {
+		return db.statisticsDao();
 	}
 
 }

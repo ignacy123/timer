@@ -12,11 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.timer.R;
-import com.example.timer.databinding.FragmentCounterBinding;
+import com.example.timer.databinding.FragmentStatisticsBinding;
 import com.example.timer.viewmodel.StatisticsViewModel;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import javax.inject.Inject;
 
@@ -27,7 +24,7 @@ public class StatisticsFragment extends Fragment {
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private StatisticsViewModel viewModel;
-	private FragmentCounterBinding binding;
+	private FragmentStatisticsBinding binding;
 
 	public StatisticsFragment() {
 
@@ -44,21 +41,46 @@ public class StatisticsFragment extends Fragment {
 
 	@Override
 	public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
-		GraphView graph = (GraphView) findViewById(R.id.graph);
-		LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-				new DataPoint(0, 1),
-				new DataPoint(1, 5),
-				new DataPoint(2, 3),
-				new DataPoint(3, 2),
-				new DataPoint(4, 6)
-		});
-		graph.addSeries(series);
+		//		GraphView graph = (GraphView) findViewById(R.id.graph);
+		//		LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+		//				new DataPoint(0, 1),
+		//				new DataPoint(1, 5),
+		//				new DataPoint(2, 3),
+		//				new DataPoint(3, 2),
+		//				new DataPoint(4, 6)
+		//		});
+		//		graph.addSeries(series);
 		super.onActivityCreated(savedInstanceState);
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(StatisticsViewModel.class);
-		viewModel.getBestStatistics()
-				.observe(this, statistics -> {
-					binding.setStatistics(statistics);
+		viewModel.getBestSingle()
+				.observe(this, single -> {
+					binding.setSingle(single);
+					binding.executePendingBindings();
+				});
+		viewModel.getBestMo3()
+				.observe(this, value -> {
+					binding.setMo3(value);
+					binding.executePendingBindings();
+				});
+		viewModel.getBestAvg5()
+				.observe(this, value -> {
+					binding.setAvg5(value);
+					binding.executePendingBindings();
+				});
+		viewModel.getBestAvg12()
+				.observe(this, value -> {
+					binding.setAvg12(value);
+					binding.executePendingBindings();
+				});
+		viewModel.getBestAvg50()
+				.observe(this, value -> {
+					binding.setAvg50(value);
+					binding.executePendingBindings();
+				});
+		viewModel.getBestAvg100()
+				.observe(this, value -> {
+					binding.setAvg100(value);
 					binding.executePendingBindings();
 				});
 	}

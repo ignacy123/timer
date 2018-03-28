@@ -19,7 +19,7 @@ import java.util.List;
  * Created by ignacy on 21.09.17.
  */
 @Dao
-public interface ScoreDAO {
+public interface ScoreDao {
 
 	@Query("DELETE FROM score")
 	void clear();
