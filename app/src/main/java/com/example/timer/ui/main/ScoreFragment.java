@@ -81,9 +81,9 @@ public class ScoreFragment extends Fragment implements MyScoreRecyclerViewAdapte
 	public void onLongClick(Score score) {
 
 		new AlertDialog.Builder(getContext())//
-				.setMessage("Do you want to remove this time?")//TODO
-				.setPositiveButton("Yes", (dialogInterface, i) -> viewModel.removeScore(score))
-				.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss())
+				.setMessage(R.string.time_remove)
+				.setPositiveButton(R.string.yes, (dialogInterface, i) -> viewModel.removeScore(score))
+				.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss())
 				.show();
 	}
 }

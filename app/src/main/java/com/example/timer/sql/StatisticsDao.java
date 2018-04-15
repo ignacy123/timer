@@ -50,4 +50,5 @@ public interface StatisticsDao {
 
 	@Query("SELECT MIN(avg100) FROM statistics")
 	LiveData<Long> getBestAvg100();
+
 }

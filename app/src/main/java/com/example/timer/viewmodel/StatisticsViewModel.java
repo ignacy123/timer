@@ -5,7 +5,10 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.timer.businesslogic.timeprovider.TimeFormatter;
+import com.example.timer.model.Statistics;
 import com.example.timer.sql.StatisticsDao;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -53,5 +56,9 @@ public class StatisticsViewModel extends ViewModel {
 			return "-";
 		}
 		return formatter.formatTime(bestMo3);
+	}
+
+	public LiveData<List<Statistics>> getAllTimes(){
+		return statisticsDao.fetch();
 	}
 }

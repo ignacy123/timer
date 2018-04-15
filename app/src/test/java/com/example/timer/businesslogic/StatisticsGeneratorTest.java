@@ -24,19 +24,19 @@ public class StatisticsGeneratorTest {
 	List<Score> scores = new ArrayList<>();
 
 	@Test
-	public void countsAllKindsAverages() {
+	public void countsAllKindsOfAverages() {
 		Score dummyScore = new Score("", 1000, "");
 
-		for (int i = 0; i <= 200; i++) {
+		for (int i = 0; i <= 100; i++) {
 			scores.add(dummyScore);
 		}
 
 		Statistics statistics = generator.generateAverages(scores);
-		assertThat(statistics.getMo3(), is("1.000"));
-		assertThat(statistics.getAvg5(), is("1.000"));
-		assertThat(statistics.getAvg12(), is("1.000"));
-		assertThat(statistics.getAvg50(), is("1.000"));
-		assertThat(statistics.getAvg100(), is("1.000"));
+		assertThat(statistics.getFormattedMo3(), is("1.000"));
+		assertThat(statistics.getFormattedAvg5(), is("1.000"));
+		assertThat(statistics.getFormattedAvg12(), is("1.000"));
+		assertThat(statistics.getFormattedAvg50(), is("1.000"));
+		assertThat(statistics.getFormattedAvg100(), is("1.000"));
 
 	}
 
@@ -48,8 +48,8 @@ public class StatisticsGeneratorTest {
 		scores.add(new Score("", 50, ""));
 
 		Statistics statistics = generator.generateAverages(scores);
-		assertThat(statistics.getMo3(), is("0.383"));
-		assertThat(statistics.getAvg5(), is("0.700"));
+		assertThat(statistics.getFormattedMo3(), is("0.383"));
+		assertThat(statistics.getFormattedAvg5(), is("0.700"));
 
 	}
 
@@ -62,12 +62,11 @@ public class StatisticsGeneratorTest {
 			scores.add(dummyScore);
 		}
 		Statistics statistics = generator.generateAverages(scores);
-		statistics = generator.getBestAverages();
-		assertThat(statistics.getMo3(), is("1.000"));
-		assertThat(statistics.getAvg5(), is("1.000"));
-		assertThat(statistics.getAvg12(), is("1.000"));
-		assertThat(statistics.getAvg50(), is("1.000"));
-		assertThat(statistics.getAvg100(), is("1.000"));
+		assertThat(statistics.getFormattedMo3(), is("1.000"));
+		assertThat(statistics.getFormattedAvg5(), is("1.000"));
+		assertThat(statistics.getFormattedAvg12(), is("1.000"));
+		assertThat(statistics.getFormattedAvg50(), is("1.000"));
+		assertThat(statistics.getFormattedAvg100(), is("1.000"));
 	}
 
 }
