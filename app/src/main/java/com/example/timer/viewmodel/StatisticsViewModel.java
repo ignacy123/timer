@@ -58,7 +58,7 @@ public class StatisticsViewModel extends ViewModel {
 		return formatter.formatTime(bestMo3);
 	}
 
-	public LiveData<List<Statistics>> getAllTimes(){
+	public LiveData<List<Statistics>> getAllTimes() {
 		return statisticsDao.fetch();
 	}
 }

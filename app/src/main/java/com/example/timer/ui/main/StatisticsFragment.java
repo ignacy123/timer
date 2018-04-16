@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.timer.R;
+import com.example.timer.businesslogic.timeprovider.GraphGenerator;
+import com.example.timer.businesslogic.timeprovider.GraphGeneratorImpl;
 import com.example.timer.databinding.FragmentStatisticsBinding;
 import com.example.timer.model.Statistics;
 import com.example.timer.viewmodel.StatisticsViewModel;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
@@ -32,6 +32,7 @@ public class StatisticsFragment extends Fragment {
 	private StatisticsViewModel viewModel;
 	private FragmentStatisticsBinding binding;
 	private View view;
+	private GraphGenerator graphGenerator = new GraphGeneratorImpl();
 
 	public StatisticsFragment() {
 
@@ -90,10 +91,7 @@ public class StatisticsFragment extends Fragment {
 
 	private void createGraphFromStatistics(List<Statistics> values) {
 		GraphView graph = view.findViewById(R.id.graph);
-		LineGraphSeries<DataPoint> series = new LineGraphSeries<>(
-				new DataPoint[] { new DataPoint(0, 1), new DataPoint(1, 5), new DataPoint(2, 3), new DataPoint(3, 2),
-						new DataPoint(4, 6) });
-		graph.addSeries(series);
+		graphGenerator.makeGraph(graph, values);
 	}
 
 	@Override
