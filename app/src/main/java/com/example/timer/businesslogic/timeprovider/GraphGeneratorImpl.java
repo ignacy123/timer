@@ -8,11 +8,20 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by ignacy on 16.04.18.
  */
 
 public class GraphGeneratorImpl implements GraphGenerator {
+
+	private final TimeFormatter formatter;
+
+	@Inject
+	public GraphGeneratorImpl(TimeFormatter formatter) {
+		this.formatter = formatter;
+	}
 
 	@Override
 	public void makeGraph(GraphView graph, List<Statistics> values) {
@@ -39,8 +48,6 @@ public class GraphGeneratorImpl implements GraphGenerator {
 							return super.formatLabel(value, isValueX);
 						} else {
 							// show currency for y values
-							TimeFormatter formatter =
-									new TimeFormatterImpl(); // TODO próbowałem wstrzyknąć daggerem, ale coś nie pykło, dlatego jest tutaj
 							return formatter.formatTime((long) value);
 						}
 					}

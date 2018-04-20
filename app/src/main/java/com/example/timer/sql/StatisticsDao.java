@@ -33,22 +33,22 @@ public interface StatisticsDao {
 	@Delete
 	void delete(Statistics statistics);
 
-	@Query("SELECT MIN(single) FROM statistics")
+	@Query("SELECT MIN(single) FROM statistics WHERE single!=0")
 	LiveData<Long> getBestSingle();
 
-	@Query("SELECT MIN(mo3) FROM statistics")
+	@Query("SELECT MIN(mo3) FROM statistics WHERE mo3!=0")
 	LiveData<Long> getBestMo3();
 
-	@Query("SELECT MIN(avg5) FROM statistics")
+	@Query("SELECT MIN(avg5) FROM statistics WHERE avg5!=0")
 	LiveData<Long> getBestAvg5();
 
-	@Query("SELECT MIN(avg12) FROM statistics")
+	@Query("SELECT MIN(avg12) FROM statistics WHERE avg12!=0")
 	LiveData<Long> getBestAvg12();
 
-	@Query("SELECT MIN(avg50) FROM statistics")
+	@Query("SELECT MIN(avg50) FROM statistics WHERE avg50!=0")
 	LiveData<Long> getBestAvg50();
 
-	@Query("SELECT MIN(avg100) FROM statistics")
+	@Query("SELECT MIN(avg100) FROM statistics WHERE avg100!=0")
 	LiveData<Long> getBestAvg100();
 
 }

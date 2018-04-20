@@ -32,7 +32,8 @@ public class StatisticsFragment extends Fragment {
 	private StatisticsViewModel viewModel;
 	private FragmentStatisticsBinding binding;
 	private View view;
-	private GraphGenerator graphGenerator = new GraphGeneratorImpl();
+	@Inject
+	GraphGenerator graphGenerator;
 
 	public StatisticsFragment() {
 
