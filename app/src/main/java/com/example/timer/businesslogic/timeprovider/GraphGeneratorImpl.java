@@ -1,6 +1,6 @@
 package com.example.timer.businesslogic.timeprovider;
 
-import com.example.timer.model.Statistics;
+import com.example.timer.model.Score;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -24,20 +24,23 @@ public class GraphGeneratorImpl implements GraphGenerator {
 	}
 
 	@Override
-	public void makeGraph(GraphView graph, List<Statistics> values) {
+	public void makeGraph(GraphView graph, List<Score> values) {
 
 		DataPoint[] dataPoints;
 		dataPoints = new DataPoint[values.size()];
 		for (int i = 0; i < values.size(); i++) {
 			dataPoints[i] = new DataPoint(i, values.get(i)
-					.getSingle());
+					.getTime());
 		}
 
 		LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
 		series.setDrawDataPoints(true);
 		series.setDataPointsRadius(10f);
-		series.setAnimated(true);
-		graph.addSeries(series);
+
+		graph.getViewport()
+				.setXAxisBoundsManual(true);
+		graph.getViewport()
+				.setMaxX(values.size());
 		graph.getGridLabelRenderer()
 				.setLabelFormatter(new DefaultLabelFormatter() {
 
@@ -52,5 +55,7 @@ public class GraphGeneratorImpl implements GraphGenerator {
 						}
 					}
 				});
+
+		graph.addSeries(series);
 	}
 }

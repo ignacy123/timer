@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 
 import com.example.timer.R;
 import com.example.timer.businesslogic.timeprovider.GraphGenerator;
-import com.example.timer.businesslogic.timeprovider.GraphGeneratorImpl;
 import com.example.timer.databinding.FragmentStatisticsBinding;
-import com.example.timer.model.Statistics;
+import com.example.timer.model.Score;
+import com.example.timer.viewmodel.ScoreViewModel;
 import com.example.timer.viewmodel.StatisticsViewModel;
 import com.jjoe64.graphview.GraphView;
 
@@ -30,6 +30,7 @@ public class StatisticsFragment extends Fragment {
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	private StatisticsViewModel viewModel;
+	private ScoreViewModel scoreViewModel;
 	private FragmentStatisticsBinding binding;
 	private View view;
 	@Inject
@@ -54,7 +55,9 @@ public class StatisticsFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(StatisticsViewModel.class);
-		viewModel.getAllTimes()
+		scoreViewModel = ViewModelProviders.of(this, viewModelFactory)
+				.get(ScoreViewModel.class);
+		scoreViewModel.getScores()
 				.observe(this, values -> {
 					createGraphFromStatistics(values);
 				});
@@ -90,7 +93,7 @@ public class StatisticsFragment extends Fragment {
 				});
 	}
 
-	private void createGraphFromStatistics(List<Statistics> values) {
+	private void createGraphFromStatistics(List<Score> values) {
 		GraphView graph = view.findViewById(R.id.graph);
 		graphGenerator.makeGraph(graph, values);
 	}

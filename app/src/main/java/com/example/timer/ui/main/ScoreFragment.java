@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.timer.R;
+import com.example.timer.businesslogic.timeprovider.GraphGenerator;
 import com.example.timer.model.Score;
+import com.example.timer.model.Statistics;
 import com.example.timer.viewmodel.ScoreViewModel;
+import com.jjoe64.graphview.GraphView;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +32,8 @@ public class ScoreFragment extends Fragment implements MyScoreRecyclerViewAdapte
 	@Inject
 	ViewModelProvider.Factory viewModelFactory;
 	ScoreViewModel viewModel;
+	@Inject
+	GraphGenerator graphGenerator;
 
 	private static final String ARG_COLUMN_COUNT = "column-count";
 	RecyclerView recyclerView;
@@ -63,7 +68,8 @@ public class ScoreFragment extends Fragment implements MyScoreRecyclerViewAdapte
 		viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(ScoreViewModel.class);
 		viewModel.getScores()
-				.observe(this, scores -> rotateAndSetScores(scores));
+				.observe(this, scores -> rotateAndSetScores(scores)
+				);
 	}
 
 	private void rotateAndSetScores(List<Score> scores) {
