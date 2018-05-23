@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.timer.businesslogic.timeprovider.ScrambleGenerator;
 import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
 import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.model.Score;
@@ -25,8 +26,7 @@ public class CounterViewModel extends ViewModel {
 	MutableLiveData<String> counter = new MutableLiveData<>();
 
 	MutableLiveData<String> scramble = new MutableLiveData<>();
-
-	private ThreeByThreeScrambleGeneratorImpl generator = new ThreeByThreeScrambleGeneratorImpl();
+	private ScrambleGenerator currentScrambleGenerator = new ThreeByThreeScrambleGeneratorImpl();
 
 	private StatisticsGenerator statisticsGenerator;
 	private StatisticsDao statisticsDao;
@@ -44,7 +44,7 @@ public class CounterViewModel extends ViewModel {
 		this.executors = executors;
 		this.statisticsGenerator = statisticsGenerator;
 		this.statisticsDao = statisticsDao;
-		scramble.postValue(generator.generate());
+		scramble.postValue(currentScrambleGenerator.generate());
 	}
 
 	public LiveData<String> getCounter() {
@@ -74,16 +74,13 @@ public class CounterViewModel extends ViewModel {
 
 	}
 
-	//	public void changeTimerValue();
-
 	public void stopCounting() {
 		long l = timeCounter.stopCounting();
 		Score score = new Score(scramble.getValue(), l, timeCounter.getFormattedTime());
 		counter.postValue(String.valueOf(timeCounter.getFormattedTime()));
 		executors.diskIO()
 				.execute(() -> scoreDao.persist(score));
-		scramble.postValue(generator.generate());
+		scramble.postValue(currentScrambleGenerator.generate());
 
 	}
-
 }

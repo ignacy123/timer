@@ -15,7 +15,7 @@ import static com.example.timer.businesslogic.timeprovider.ThreeByThreeMove.U;
  * Created by ignacy on 15.01.18.
  */
 
-public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGenerator {
+public class ThreeByThreeScrambleGeneratorImpl implements ThreeByThreeScrambleGenerator, ScrambleGenerator {
 
 	public static final ImmutableMap<Integer, ThreeByThreeMove> MAP = ImmutableMap.<Integer, ThreeByThreeMove>builder().put(0, R)
 			.put(1, L)

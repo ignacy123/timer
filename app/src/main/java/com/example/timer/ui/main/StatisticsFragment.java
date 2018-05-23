@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 
 public class StatisticsFragment extends Fragment {

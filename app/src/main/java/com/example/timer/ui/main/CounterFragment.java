@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 import com.example.timer.R;
 import com.example.timer.databinding.FragmentCounterBinding;
@@ -17,6 +18,8 @@ import com.example.timer.viewmodel.CounterViewModel;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 
 public class CounterFragment extends Fragment {

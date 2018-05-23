@@ -80,4 +80,9 @@
     <string name="action_settings">settings</string>
     <string name="inspection">Use inspection?</string>
     <string name="action_menu">menu</string>
+
+    <string-array name="cubes">
+        <item>3x3 Cube</item>
+        <item>4x4 Cube</item>
+    </string-array>
 </resources>
