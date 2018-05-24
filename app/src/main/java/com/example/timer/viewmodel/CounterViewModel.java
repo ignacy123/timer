@@ -5,9 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
+import com.example.timer.businesslogic.timeprovider.FourByFourScrambleGeneratorImpl;
 import com.example.timer.businesslogic.timeprovider.ScrambleGenerator;
 import com.example.timer.businesslogic.timeprovider.StatisticsGenerator;
-import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.model.Score;
 import com.example.timer.model.Statistics;
 import com.example.timer.sql.ScoreDao;
@@ -26,7 +26,13 @@ public class CounterViewModel extends ViewModel {
 	MutableLiveData<String> counter = new MutableLiveData<>();
 
 	MutableLiveData<String> scramble = new MutableLiveData<>();
-	private ScrambleGenerator currentScrambleGenerator = new ThreeByThreeScrambleGeneratorImpl();
+
+	public void setCurrentScrambleGenerator(ScrambleGenerator currentScrambleGenerator) {
+		this.currentScrambleGenerator = currentScrambleGenerator;
+		scramble.postValue(currentScrambleGenerator.generate());
+	}
+
+	private ScrambleGenerator currentScrambleGenerator = new FourByFourScrambleGeneratorImpl();
 
 	private StatisticsGenerator statisticsGenerator;
 	private StatisticsDao statisticsDao;

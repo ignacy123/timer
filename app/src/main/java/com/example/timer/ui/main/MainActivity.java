@@ -1,6 +1,7 @@
 package com.example.timer.ui.main;
 
 import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.timer.R;
+import com.example.timer.businesslogic.timeprovider.FourByFourScrambleGeneratorImpl;
+import com.example.timer.businesslogic.timeprovider.ThreeByThreeScrambleGeneratorImpl;
 import com.example.timer.ui.settings.SettingsActivity;
+import com.example.timer.viewmodel.CounterViewModel;
 
 import javax.inject.Inject;
 
@@ -38,14 +42,15 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 	@BindView(R.id.categorySpinner)
 	Spinner spinner;
 
-	String currentPuzzle = "3x3";
-
 	@Override
 	protected void onCreate(@Nullable final Bundle savedInstanceState) {
 		AndroidInjection.inject(this);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
+
+		CounterViewModel viewModel = ViewModelProviders.of(this, viewModelFactory)
+				.get(CounterViewModel.class);
 
 		if (null == savedInstanceState) {
 			pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
@@ -66,19 +71,17 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-			@Override
-			public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-				if (position == 0) {
-					currentPuzzle = "3x3"; //TODO
-				}
-				if (position == 1) {
-					currentPuzzle = "4x4"; //TODO
+			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+				if (i == 0) {
+					viewModel.setCurrentScrambleGenerator(new ThreeByThreeScrambleGeneratorImpl());
+				} else if (i == 1) {
+					viewModel.setCurrentScrambleGenerator(new FourByFourScrambleGeneratorImpl());
+					//TODO oddzielna baza danych
 				}
 			}
 
-			@Override
 			public void onNothingSelected(AdapterView<?> adapterView) {
-
+				return;
 			}
 		});
 	}

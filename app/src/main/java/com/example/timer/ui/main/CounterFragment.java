@@ -39,7 +39,7 @@ public class CounterFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		viewModel = ViewModelProviders.of(this, viewModelFactory)
+		viewModel = ViewModelProviders.of(getActivity(), viewModelFactory)
 				.get(CounterViewModel.class);
 		viewModel.getCounter()
 				.observe(this, counterValue -> {
