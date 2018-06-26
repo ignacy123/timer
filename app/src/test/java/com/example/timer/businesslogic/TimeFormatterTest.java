@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Created by ignacy on 08.03.18.
  */
 
-public class TestFormatterTest {
+public class TimeFormatterTest {
 
 	@Test
 	public void formatsTime() {

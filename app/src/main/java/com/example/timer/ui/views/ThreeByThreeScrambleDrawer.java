@@ -29,6 +29,8 @@ public class ThreeByThreeScrambleDrawer extends View {
 
 	private static int PADDING = 10;
 	private static int INNER_PADDING = 4;
+	private Colours[] helper;
+	int helperColourIndex;
 
 	public void DrawRandomState(ThreeByThreeRandomState state) {
 
@@ -85,8 +87,19 @@ public class ThreeByThreeScrambleDrawer extends View {
 			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
 
 			for (int j = 0; j < 3; j++) {
+				helperColourIndex = j * 3;
+				if (i == 0) {
+					helper = state.getUFace();
+				}
+				if (i == 1) {
+					helper = state.getFFace();
+				}
+				if (i == 2) {
+					helper = state.getDFace();
+				}
 				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
 				for (int k = 0; k < 3; k++) {
+					paintTwo.setColor(helper[helperColourIndex + k].getColour());
 					int innerLeft = left + k * innerSquareSize + (k + 1) * INNER_PADDING;
 					rect = new Rect(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
 					canvas.drawRect(rect, paintTwo);
@@ -99,6 +112,31 @@ public class ThreeByThreeScrambleDrawer extends View {
 			int top = squareSize + PADDING * 2;
 			rect = new Rect(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
+			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
+
+			for (int j = 0; j < 3; j++) {
+				helperColourIndex = j * 3;
+				if (i == 0) {
+					helper = state.getLFace();
+				}
+				if (i == 1) {
+					helper = state.getFFace();
+				}
+				if (i == 2) {
+					helper = state.getRFace();
+				}
+				if (i == 3) {
+					helper = state.getBFace();
+				}
+				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
+				for (int k = 0; k < 3; k++) {
+					paintTwo.setColor(helper[helperColourIndex + k].getColour());
+					int innerLeft = left + k * innerSquareSize + (k + 1) * INNER_PADDING;
+					rect = new Rect(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
+					canvas.drawRect(rect, paintTwo);
+
+				}
+			}
 		}
 		//		}
 	}
