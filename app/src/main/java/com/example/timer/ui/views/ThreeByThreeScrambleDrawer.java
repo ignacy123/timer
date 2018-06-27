@@ -27,8 +27,10 @@ public class ThreeByThreeScrambleDrawer extends View {
 		state.setColours(colours);
 	}
 
+	// TODO REVIEW obie poniższe pola powinny być oznaczone jako final
 	private static int PADDING = 10;
 	private static int INNER_PADDING = 4;
+	// TODO REVIEW dlaczego te dwie zmienne są polami klasy? czy nie wystarczy żeby były zmiennymi loklanymi w metodzie onDraw ?
 	private Colours[] helper;
 	int helperColourIndex;
 
@@ -69,7 +71,10 @@ public class ThreeByThreeScrambleDrawer extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
+		// TODO REVIEW zobacz co podpowiada Ci Android Studio odnośnie Paint i Rect, zrozum o co chodzi i spróbuj to poprawić
+
 		//		if (state != null) {
+		// TODO REVIEW jesli jakieś zmienne mogą to niech będą oznaczone jako final (height, squareSize, innerSquareSize)
 		int height = canvas.getHeight() - 4 * PADDING;
 		int width = canvas.getWidth() - 5 * PADDING;
 		int squareSize = height / 3;
@@ -84,10 +89,12 @@ public class ThreeByThreeScrambleDrawer extends View {
 			rect = new Rect(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
 
+			// TODO REVIEW niepotrzebnie liczone kilka razy
 			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
 
 			for (int j = 0; j < 3; j++) {
 				helperColourIndex = j * 3;
+				// TODO REVIEW jeżeli poniższe jest zależne tylko od zmiennej i, to czemu nie jest przed tą pętlą?
 				if (i == 0) {
 					helper = state.getUFace();
 				}
@@ -112,10 +119,13 @@ public class ThreeByThreeScrambleDrawer extends View {
 			int top = squareSize + PADDING * 2;
 			rect = new Rect(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
+
+			// TODO REVIEW niepotrzebnie liczone kilka razy
 			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
 
 			for (int j = 0; j < 3; j++) {
 				helperColourIndex = j * 3;
+				// TODO REVIEW jeżeli poniższe jest zależne tylko od zmiennej i, to czemu nie jest przed tą pętlą?
 				if (i == 0) {
 					helper = state.getLFace();
 				}
