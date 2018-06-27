@@ -26,6 +26,7 @@ public class ThreeByThreeScrambleDrawer extends View {
 		}
 		state.setColours(colours);
 	}
+
 	Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 	Rect rect = new Rect();
 
@@ -72,17 +73,16 @@ public class ThreeByThreeScrambleDrawer extends View {
 		int helperColourIndex;
 		super.onDraw(canvas);
 
-
 		//		if (state != null) {
 		final int height = canvas.getHeight() - 4 * PADDING;
 		final int width = canvas.getWidth() - 5 * PADDING;
 		final int squareSize = height / 3;
 		final int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
-		paint.setColor(Color.BLACK);
 		for (int i = 0; i < 3; i++) {
 			int left = squareSize + 2 * PADDING;
 			int top = (i + 1) * PADDING + i * squareSize;
 			rect.set(left, top, left + squareSize, top + squareSize);
+			paint.setColor(Color.BLACK);
 			canvas.drawRect(rect, paint);
 			if (i == 0) {
 				helper = state.getUFace();
@@ -107,6 +107,7 @@ public class ThreeByThreeScrambleDrawer extends View {
 			}
 		}
 		for (int i = 0; i < 4; i++) {
+			paint.setColor(Color.BLACK);
 			int left = (i + 1) * PADDING + i * squareSize;
 			int top = squareSize + PADDING * 2;
 			rect.set(left, top, left + squareSize, top + squareSize);

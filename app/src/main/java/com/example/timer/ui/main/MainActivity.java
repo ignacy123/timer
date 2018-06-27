@@ -52,10 +52,8 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 		CounterViewModel viewModel = ViewModelProviders.of(this, viewModelFactory)
 				.get(CounterViewModel.class);
 
-		if (null == savedInstanceState) {
-			pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
-			pager.setCurrentItem(1);
-		}
+		pager.setAdapter(new MainPagerAdapter(getSupportFragmentManager()));
+		pager.setCurrentItem(1);
 		Intent intent = new Intent(this, SettingsActivity.class);
 
 		imageView.setOnClickListener(new View.OnClickListener() {
