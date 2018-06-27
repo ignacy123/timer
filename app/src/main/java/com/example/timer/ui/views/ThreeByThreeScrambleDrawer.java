@@ -26,13 +26,11 @@ public class ThreeByThreeScrambleDrawer extends View {
 		}
 		state.setColours(colours);
 	}
+	Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	Rect rect = new Rect();
 
-	// TODO REVIEW obie poniższe pola powinny być oznaczone jako final
-	private static int PADDING = 10;
-	private static int INNER_PADDING = 4;
-	// TODO REVIEW dlaczego te dwie zmienne są polami klasy? czy nie wystarczy żeby były zmiennymi loklanymi w metodzie onDraw ?
-	private Colours[] helper;
-	int helperColourIndex;
+	private final static int PADDING = 10;
+	private final static int INNER_PADDING = 4;
 
 	public void DrawRandomState(ThreeByThreeRandomState state) {
 
@@ -69,25 +67,22 @@ public class ThreeByThreeScrambleDrawer extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+
+		Colours[] helper = state.getUFace();
+		int helperColourIndex;
 		super.onDraw(canvas);
 
-		// TODO REVIEW zobacz co podpowiada Ci Android Studio odnośnie Paint i Rect, zrozum o co chodzi i spróbuj to poprawić
-		// paint i rect są deprecated, ale nie udało mi się znaleźć zamiennika który powinno się stosowac
 
 		//		if (state != null) {
 		final int height = canvas.getHeight() - 4 * PADDING;
 		final int width = canvas.getWidth() - 5 * PADDING;
 		final int squareSize = height / 3;
 		final int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
-		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paint.setColor(Color.BLACK);
-		Paint paintTwo = new Paint(Paint.ANTI_ALIAS_FLAG);
-		paintTwo.setColor(Color.WHITE);
-		Rect rect;
 		for (int i = 0; i < 3; i++) {
 			int left = squareSize + 2 * PADDING;
 			int top = (i + 1) * PADDING + i * squareSize;
-			rect = new Rect(left, top, left + squareSize, top + squareSize);
+			rect.set(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
 			if (i == 0) {
 				helper = state.getUFace();
@@ -103,10 +98,10 @@ public class ThreeByThreeScrambleDrawer extends View {
 				helperColourIndex = j * 3;
 				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
 				for (int k = 0; k < 3; k++) {
-					paintTwo.setColor(helper[helperColourIndex + k].getColour());
+					paint.setColor(helper[helperColourIndex + k].getColour());
 					int innerLeft = left + k * innerSquareSize + (k + 1) * INNER_PADDING;
-					rect = new Rect(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
-					canvas.drawRect(rect, paintTwo);
+					rect.set(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
+					canvas.drawRect(rect, paint);
 
 				}
 			}
@@ -114,7 +109,7 @@ public class ThreeByThreeScrambleDrawer extends View {
 		for (int i = 0; i < 4; i++) {
 			int left = (i + 1) * PADDING + i * squareSize;
 			int top = squareSize + PADDING * 2;
-			rect = new Rect(left, top, left + squareSize, top + squareSize);
+			rect.set(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
 
 			if (i == 0) {
@@ -133,10 +128,10 @@ public class ThreeByThreeScrambleDrawer extends View {
 				helperColourIndex = j * 3;
 				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
 				for (int k = 0; k < 3; k++) {
-					paintTwo.setColor(helper[helperColourIndex + k].getColour());
+					paint.setColor(helper[helperColourIndex + k].getColour());
 					int innerLeft = left + k * innerSquareSize + (k + 1) * INNER_PADDING;
-					rect = new Rect(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
-					canvas.drawRect(rect, paintTwo);
+					rect.set(innerLeft, innerTop, innerLeft + innerSquareSize, innerTop + innerSquareSize);
+					canvas.drawRect(rect, paint);
 
 				}
 			}
