@@ -72,12 +72,13 @@ public class ThreeByThreeScrambleDrawer extends View {
 		super.onDraw(canvas);
 
 		// TODO REVIEW zobacz co podpowiada Ci Android Studio odnośnie Paint i Rect, zrozum o co chodzi i spróbuj to poprawić
+		// paint i rect są deprecated, ale nie udało mi się znaleźć zamiennika który powinno się stosowac
 
 		//		if (state != null) {
-		// TODO REVIEW jesli jakieś zmienne mogą to niech będą oznaczone jako final (height, squareSize, innerSquareSize)
-		int height = canvas.getHeight() - 4 * PADDING;
-		int width = canvas.getWidth() - 5 * PADDING;
-		int squareSize = height / 3;
+		final int height = canvas.getHeight() - 4 * PADDING;
+		final int width = canvas.getWidth() - 5 * PADDING;
+		final int squareSize = height / 3;
+		final int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
 		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paint.setColor(Color.BLACK);
 		Paint paintTwo = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -88,22 +89,18 @@ public class ThreeByThreeScrambleDrawer extends View {
 			int top = (i + 1) * PADDING + i * squareSize;
 			rect = new Rect(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
-
-			// TODO REVIEW niepotrzebnie liczone kilka razy
-			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
+			if (i == 0) {
+				helper = state.getUFace();
+			}
+			if (i == 1) {
+				helper = state.getFFace();
+			}
+			if (i == 2) {
+				helper = state.getDFace();
+			}
 
 			for (int j = 0; j < 3; j++) {
 				helperColourIndex = j * 3;
-				// TODO REVIEW jeżeli poniższe jest zależne tylko od zmiennej i, to czemu nie jest przed tą pętlą?
-				if (i == 0) {
-					helper = state.getUFace();
-				}
-				if (i == 1) {
-					helper = state.getFFace();
-				}
-				if (i == 2) {
-					helper = state.getDFace();
-				}
 				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
 				for (int k = 0; k < 3; k++) {
 					paintTwo.setColor(helper[helperColourIndex + k].getColour());
@@ -120,24 +117,20 @@ public class ThreeByThreeScrambleDrawer extends View {
 			rect = new Rect(left, top, left + squareSize, top + squareSize);
 			canvas.drawRect(rect, paint);
 
-			// TODO REVIEW niepotrzebnie liczone kilka razy
-			int innerSquareSize = (squareSize - 4 * INNER_PADDING) / 3;
-
+			if (i == 0) {
+				helper = state.getLFace();
+			}
+			if (i == 1) {
+				helper = state.getFFace();
+			}
+			if (i == 2) {
+				helper = state.getRFace();
+			}
+			if (i == 3) {
+				helper = state.getBFace();
+			}
 			for (int j = 0; j < 3; j++) {
 				helperColourIndex = j * 3;
-				// TODO REVIEW jeżeli poniższe jest zależne tylko od zmiennej i, to czemu nie jest przed tą pętlą?
-				if (i == 0) {
-					helper = state.getLFace();
-				}
-				if (i == 1) {
-					helper = state.getFFace();
-				}
-				if (i == 2) {
-					helper = state.getRFace();
-				}
-				if (i == 3) {
-					helper = state.getBFace();
-				}
 				int innerTop = top + (j + 1) * INNER_PADDING + j * innerSquareSize;
 				for (int k = 0; k < 3; k++) {
 					paintTwo.setColor(helper[helperColourIndex + k].getColour());
