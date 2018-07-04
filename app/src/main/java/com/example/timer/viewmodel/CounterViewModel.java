@@ -82,7 +82,7 @@ public class CounterViewModel extends ViewModel {
 
 	public void stopCounting() {
 		long l = timeCounter.stopCounting();
-		Score score = new Score(scramble.getValue(), l, timeCounter.getFormattedTime());
+		Score score = new Score(0, scramble.getValue(), l, timeCounter.getFormattedTime());
 		counter.postValue(String.valueOf(timeCounter.getFormattedTime()));
 		executors.diskIO()
 				.execute(() -> scoreDao.persist(score));
